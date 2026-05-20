@@ -38,6 +38,7 @@ SUB_HERO_TEMPLATE = '''      <section class="wr-sub-hero" aria-label="Page intro
 
 CTA_LABELS = (
     "Book Now!",
+    "Book Now",
     "Book Assistance Now!",
     "Call Now!",
     "Order Now +44 7452010395",
@@ -72,12 +73,25 @@ def replace_meta_descriptions(html: str, desc: str) -> str:
 
 
 def fix_cta_buttons(html: str) -> str:
-    for label in CTA_LABELS:
+    extra_labels = (
+        "Get Assistance Now!",
+        "Get Help Now!",
+        "DM Now!",
+        "Contact Now!",
+    )
+    for label in (*CTA_LABELS, *extra_labels):
         if label == "Get a free quote on WhatsApp":
             continue
+        for ws in ("", " ", "  "):
+            html = html.replace(f">{ws}{label}</a>", ">Get a free quote on WhatsApp</a>")
         html = html.replace(f">\n             {label}\n            </a>", ">\n             Get a free quote on WhatsApp\n            </a>")
-        html = html.replace(f">{label}</a>", ">Get a free quote on WhatsApp</a>")
         html = html.replace(f">\n            {label}\n           </a>", ">\n            Get a free quote on WhatsApp\n           </a>")
+        html = re.sub(
+            rf">\s*{re.escape(label)}\s*</a>",
+            ">Get a free quote on WhatsApp</a>",
+            html,
+            flags=re.IGNORECASE,
+        )
     html = re.sub(
         r'(<a class="btn viamagus-button-default[^"]*"[^>]*href="https://wa\.me/447452010395[^"]*")([^>]*)(>)',
         r'\1 target="_blank" rel="noopener"\3',
@@ -93,22 +107,19 @@ def inject_sub_hero(html: str, title: str) -> str:
     if "wr-sub-hero" in html:
         return html
     hero = SUB_HERO_TEMPLATE.format(title=title, wa=WA_UK)
-    patterns = [
-        (
-            r'(</div>\s*</div>\s*</div>\s*</div>\s*</div>\s*)'
-            r'(<div class="viamagus-component viamagus-image-text)',
-            r"\1" + hero + r"\n\2",
-        ),
-        (
-            r'(</div>\s*</div>\s*</div>\s*</div>\s*)'
-            r'(<div class="viamagus-component viamagus-background)',
-            r"\1" + hero + r"\n\2",
-        ),
-    ]
-    for pat, repl in patterns:
-        new_html, n = re.subn(pat, repl, html, count=1, flags=re.IGNORECASE)
-        if n:
-            return new_html
+    menu_pos = html.find('id="menu"')
+    if menu_pos == -1:
+        return html
+    search = html[menu_pos:]
+    for needle in (
+        '<div class="viamagus-component viamagus-image-text',
+        '<div class="viamagus-component viamagus-background',
+        '<div class="viamagus-component viamagus-richtext',
+    ):
+        rel = search.find(needle)
+        if rel != -1:
+            idx = menu_pos + rel
+            return html[:idx] + hero + html[idx:]
     return html
 
 

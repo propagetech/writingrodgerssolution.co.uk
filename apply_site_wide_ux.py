@@ -42,8 +42,8 @@ def iter_html_files() -> list[Path]:
     return files
 
 
-def replace_nav(html: str, nav_inner: str) -> str:
-    if "wr-nav-link" in html and 'href="#wr-contact">Contact' in html:
+def replace_nav(html: str, nav_inner: str, force: bool = False) -> str:
+    if not force and "wr-nav-link" in html and 'href="#wr-contact">Contact' in html:
         return html
     start = html.find('<ul class="nav" id="menu-nav">')
     if start == -1:

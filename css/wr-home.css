@@ -101,6 +101,20 @@
   border-color: #1fb855 !important;
 }
 
+/* Hide duplicate CTA in first legacy block when sub-hero is present */
+.viamagusPageSettings .wr-sub-hero ~ .viamagus-component .button-align {
+  display: none !important;
+}
+
+.viamagusPageSettings .wr-sub-hero ~ link ~ .viamagus-component .button-align,
+.viamagusPageSettings .wr-sub-hero ~ link ~ link ~ .viamagus-component .button-align {
+  display: none !important;
+}
+
+#wr-contact {
+  scroll-margin-top: 88px;
+}
+
 /* Hero */
 #wr-hero.wr-hero {
   position: relative;
@@ -872,6 +886,17 @@
   .wr-reach__copy .wr-btn-primary,
   .wr-tutoring__links {
     display: block;
+  }
+
+  .wr-sub-hero__actions {
+    flex-direction: column;
+  }
+
+  .wr-sub-hero .wr-btn-primary,
+  .wr-sub-hero .wr-btn-secondary {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
   }
 
   .wr-mobile-cta-bar {
