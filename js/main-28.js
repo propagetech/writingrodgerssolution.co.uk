@@ -24,7 +24,7 @@ function viamagusLoader (el, options) {
 				'top':'0px',
 				'left':'0px',
 				'z-index':99999
-		}).addClass('viamagus_overlay');
+		}).addClass('wr-overlay');
 		// add an overiding class name to set new loader style 
 		if (this.options.classOveride) {
 			overlay.addClass(this.options.classOveride);
@@ -32,13 +32,13 @@ function viamagusLoader (el, options) {
 		// insert overlay and loader into DOM 
 		container.append(
 			overlay.append(
-				$('<div></div>').addClass('viamagus_loader')
+				$('<div></div>').addClass('wr-loader')
 			).fadeIn(this.options.duration)
 		);
     };
 	
 	this.remove = function(){
-		var overlay = this.container.children(".viamagus_overlay");
+		var overlay = this.container.children(".wr-overlay");
 		if (overlay.length) {
 			overlay.fadeOut(this.options.classOveride, function() {
 				overlay.remove();

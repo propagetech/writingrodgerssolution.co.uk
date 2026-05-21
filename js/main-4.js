@@ -4,7 +4,7 @@ var Viamagus_Form_Loader = {
     _productQtyInfo: [],
     _init: function() {
         var that = this;
-        if ($('.viamagus-custom-form').length) {
+        if ($('.wr-form--custom').length) {
             that._loadCustomForms();
             that._initDatePicker();
             that._additionalValidations();
@@ -21,8 +21,8 @@ var Viamagus_Form_Loader = {
     _ipInfoResult: null,
     _loadCustomForms: function() {
         var that = this;
-        if ($('.viamagus-custom-form').length) {
-            $('.viamagus-custom-form').each(function(index, e) {
+        if ($('.wr-form--custom').length) {
+            $('.wr-form--custom').each(function(index, e) {
                 var customformId = $(e).attr('id');
                 var index = customformId.lastIndexOf('-');
                 var formId = customformId.substring(index + 1, customformId.length);
@@ -72,9 +72,9 @@ var Viamagus_Form_Loader = {
         }
         var html = '<img id="loaderImageForSubmit" width="60px" height="60px"';
         html = html + ' src="/static/sitebuilder/img/loading.gif">'
-        $('#viamagus-form-' + formId).find('#Submit').parent().append(html);
-        $('#viamagus-form-' + formId).find('#Submit').text('Submitting....');
-        $('#viamagus-form-' + formId).find('#loaderImageForSubmit').show();
+        $('#wr-form-' + formId).find('#Submit').parent().append(html);
+        $('#wr-form-' + formId).find('#Submit').text('Submitting....');
+        $('#wr-form-' + formId).find('#loaderImageForSubmit').show();
         var forwardToCustomUrl = formData.forwardToCusotmUrl;
         var that = this;
         var successMsg = formData.ackMsg;
@@ -117,7 +117,7 @@ var Viamagus_Form_Loader = {
                     window.location.href = forwardToCustomUrl;
                 } else if (isPaymentRequired == 'Y') {
                     $('#loaderImageForSubmit').remove();
-                    $('#viamagus-form-' + formId).find('#Submit').text('Submit');
+                    $('#wr-form-' + formId).find('#Submit').text('Submit');
                     var url = that._contextPath + "/paymentCapture.html";
                     var discountCode = '';
                     var discountAmount = '';
@@ -156,7 +156,7 @@ var Viamagus_Form_Loader = {
                     });
                 } else {
                     $('#loaderImageForSubmit').remove();
-                    $('#viamagus-form-' + formId).find('#Submit').text('Submit');
+                    $('#wr-form-' + formId).find('#Submit').text('Submit');
                     if ($('#showAckModal').length != 0) {
                         $('body').remove('#showAckModal');
                     }
@@ -174,7 +174,7 @@ var Viamagus_Form_Loader = {
             },
             errorCallBack: function() {
                 $('#loaderImageForSubmit').remove();
-                $('#viamagus-form-' + formId).find('#Submit').text('Submit');
+                $('#wr-form-' + formId).find('#Submit').text('Submit');
                 if ($('#showAckModal').length != 0) {
                     $('body').remove('#showAckModal');
                 }
@@ -196,7 +196,7 @@ var Viamagus_Form_Loader = {
     },
     _initDatePicker: function() {
         var that = this;
-        $('.viamagus-date-picker').each(function() {
+        $('.wr-date-picker').each(function() {
             var dateobj = $(this).pickmeup({
                 position: 'bottom',
                 hide_on_select: true,
@@ -210,7 +210,7 @@ var Viamagus_Form_Loader = {
                 }
             });
         });
-        $('.viamagus-date-picker-icon').click(function(e) {
+        $('.wr-date-picker__icon').click(function(e) {
             e.preventDefault();
             var id = $(this).attr("data-date-picker");
             $('#' + id).trigger('click');
@@ -298,14 +298,14 @@ var Viamagus_Form_Loader = {
                     newhtml = (html).wrap('<div></div>').parent().html();
                     $('#' + id).remove();
                     $(element).parent().parent().append(newhtml);
-                } else if ($(element).hasClass("viamagus-combobox")) {
+                } else if ($(element).hasClass("wr-combobox")) {
                     var labelId = $(element).parent().find('label').attr('id');
                     var html = $(element).parent().find('label').css('color', 'red');
                     newhtml = (html).wrap('<div></div>').parent().html();
                     $('#' + labelId).remove();
                     $(element).css("border", "1px solid red");
                     $(newhtml).insertAfter($(element).parent());
-                } else if ($(element).hasClass("viamagus-date-picker")) {
+                } else if ($(element).hasClass("wr-date-picker")) {
                     $(element).css("border", "1px solid red");
                     $(element).parent().find('label').css('color', 'red');
                     var id = $(element).parent().find('label').attr('id');
@@ -698,7 +698,7 @@ var Viamagus_Form_Loader = {
         }
     },
     _initRatings: function() {
-        $('.viamagus-star-rating').each(function() {
+        $('.wr-star-rating').each(function() {
             var stars = $(this).attr("data-number");
             $(this).raty({
                 number: stars,
@@ -711,7 +711,7 @@ var Viamagus_Form_Loader = {
     },
     _initCustomFormFileUpload: function(tenantId) {
         var that = this;
-        if ($('.viamagus-file-upload').length) {
+        if ($('.wr-file-upload').length) {
             $.ajax({
                 type: 'POST',
                 url: '/cdnupload/json/initContainerForCustomFormFileUpload.action',
@@ -725,7 +725,7 @@ var Viamagus_Form_Loader = {
         }
     },
     initDropzoneForAjaxFileUpload: function(transactionId) {
-        $('.viamagus-file-upload').each(function(index, e) {
+        $('.wr-file-upload').each(function(index, e) {
             var fileuploadId = "#" + $(e).attr("id");
             var myDropzone = new Dropzone(fileuploadId, {
                 autoProcessQueue: true,
@@ -825,7 +825,7 @@ var Viamagus_Form_Loader = {
                     break;
                 case "selectcombo":
                     $('#' + fieldId).val('');
-                    $('.viamagus-combobox').val('');
+                    $('.wr-combobox').val('');
                     break;
                 case "selectbasic":
                     $('#' + fieldId + ' option:first-child').prop('selected', true);
@@ -889,21 +889,21 @@ var Viamagus_Form_Loader = {
         }
     },
     _initCombobox: function() {
-        if ($('select.viamagus-combobox').length) {
-            $('select.viamagus-combobox').combobox();
+        if ($('select.wr-combobox').length) {
+            $('select.wr-combobox').combobox();
         }
     },
     _initPhonePlugin: function() {
         var that = this;
-        if ($('.viamagus-phone').length) {
+        if ($('.wr-phone').length) {
             $.getJSON("http://freegeoip.net/json/", function(result) {
-                $('.viamagus-phone').intlTelInput({
+                $('.wr-phone').intlTelInput({
                     defaultCountry: result.country_code.toLowerCase(),
                     autoPlaceholder: false,
                     utilsScript: "/static/sitebuilder/js/utils.js"
                 });
             }).error(function() {
-                $('.viamagus-phone').intlTelInput({
+                $('.wr-phone').intlTelInput({
                     defaultCountry: 'auto',
                     autoPlaceholder: false,
                     utilsScript: "/static/sitebuilder/js/utils.js"
@@ -914,8 +914,8 @@ var Viamagus_Form_Loader = {
         }
     },
     initPhonePluginValidation: function() {
-        if ($('.viamagus-phone').length) {
-            $('.viamagus-phone').each(function(index, e) {
+        if ($('.wr-phone').length) {
+            $('.wr-phone').each(function(index, e) {
                 var fieldId = $(e).attr("id");
                 var phoneNo = $('#' + fieldId).val();
                 var phoneNoObj = $('#' + fieldId);
@@ -972,7 +972,7 @@ var Viamagus_Form_Loader = {
         var that = this;
         this.setPaymentRequestParams();
         this.loadMasterCountryStateCityList();
-        if ($('.viamagus-payment-form').length > 0) {
+        if ($('.wr-payment__form').length > 0) {
             this._initPhonePlugin();
             $("#paymentForm").validate({
                 rules: {
@@ -1038,15 +1038,15 @@ var Viamagus_Form_Loader = {
                 if ($('#paymentCurrency').length && $('#paymentCurrency').val() != '') {
                     paymentCurrency = $('#paymentCurrency').find("option:selected").val();
                 }
-                $('.viamagus-payment-mode-payu').hide();
+                $('.wr-payment__mode--payu').hide();
                 for (var i = 0; i < paymentOption.length; i++) {
                     var option = paymentOption[i].paymentMode;
                     var paymentLabel = paymentOption[i].paymentModeLabel;
-                    if ($('.viamagus-payment-mode-' + option).length) {
-                        $('.viamagus-payment-mode-' + option).show();
+                    if ($('.wr-payment__mode-' + option).length) {
+                        $('.wr-payment__mode-' + option).show();
                         $("input[name=paymentMode][value=" + option + "]").prop('disabled', false);
                         $("input[name=paymentMode][value=" + option + "]").prop('checked', true);
-                        $('.viamagus-payment-mode-' + option + ' .custom-label').html(paymentLabel);
+                        $('.wr-payment__mode-' + option + ' .custom-label').html(paymentLabel);
                         if (option == 'paypal' && paymentCurrency == 'INR') {
                             $("input[name=paymentMode][value=" + option + "]").prop('checked', false);
                             $("input[name=paymentMode][value=" + option + "]").prop('disabled', true);
@@ -1059,12 +1059,12 @@ var Viamagus_Form_Loader = {
                 }
             }
         });
-        if ($('.viamagus-payment-mode-section').length && $('#entityType').val() == 'Order') {
+        if ($('.wr-payment__mode-section').length && $('#entityType').val() == 'Order') {
             that._defaultCustomerInfo();
         }
     },
     setPaymentRequestParams: function() {
-        if ($('.viamagus-payment-form').length > 0) {
+        if ($('.wr-payment__form').length > 0) {
             if (this.getParameter('entityType') != null) {
                 $('#entityType').val(this.getParameter('entityType'));
             }
@@ -1081,7 +1081,7 @@ var Viamagus_Form_Loader = {
                 $('#paymentAmount').attr("disabled", "disabled");
             }
         }
-        if ($('.viamagus-payment-success').length) {
+        if ($('.wr-payment--success').length) {
             $('#txnId').html(this.getParameter('txnId'));
             $('#paymentAmount').html(this.getParameter('paymentAmount'));
             $('#supportEmailId').html(this.getParameter('supportEmailId'));
@@ -1093,13 +1093,13 @@ var Viamagus_Form_Loader = {
             this.initAndroidBridgeOnPayuTransactionOver('success');
             this.loadPaymentSuccessSummary();
         }
-        if ($('.viamagus-payment-failure').length) {
+        if ($('.wr-payment--failure').length) {
             $('#txnId').html(this.getParameter('txnId'));
             $('#supportEmailId').html(this.getParameter('supportEmailId'));
             $('#error').html(this.getParameter('error'));
             this.initAndroidBridgeOnPayuTransactionOver('failed');
         }
-        if ($('.viamagus-payment-cancel').length) {
+        if ($('.wr-payment--cancel').length) {
             $('#txnId').html(this.getParameter('txnId'));
             $('#supportEmailId').html(this.getParameter('supportEmailId'));
             $('#error').html(this.getParameter('error'));
@@ -1113,7 +1113,7 @@ var Viamagus_Form_Loader = {
         $('#failureUrl').val(location.protocol + "//" + location.host + "/paymentFailure.html?txnId=");
         $('#paymentSubmit').attr("disabled", "disabled");
         var paymentMode = "payu";
-        if ($('.viamagus-payment-mode-section').length) {
+        if ($('.wr-payment__mode-section').length) {
             paymentMode = $('input[name="paymentMode"]:checked').val();
         }
         var txnCurrency = '';
@@ -1408,8 +1408,8 @@ var Viamagus_Form_Loader = {
         var that = this;
         var txnCurrency = Viamagus_Currency_Manager.txnCurrency,
             conversionRate = Viamagus_Currency_Manager.conversionRate;
-        if ($('.viamagus-form-products').length) {
-            var allowMultiple = $('.viamagus-form-products').attr("data-allow-multiple-products");
+        if ($('.wr-form__products').length) {
+            var allowMultiple = $('.wr-form__products').attr("data-allow-multiple-products");
             var totalAmountToPay = 0;
             var totalAmountToPayInTxnCur = 0;
             var currencyCode = baseCurrency;
@@ -1421,7 +1421,7 @@ var Viamagus_Form_Loader = {
                 $('.vm-form-product-currency-code').html(currencyCode);
             }
             if (allowMultiple == "true") {
-                $('.viamagus-allow-multiple-products-purchase').each(function(index, e) {
+                $('.wr-product--allow-multiple').each(function(index, e) {
                     var checkBox = $(e).find("#productCheckBox");
                     var price = $(e).attr("data-product-price");
                     var priceInTxnCur = $(e).attr("data-product-price-in-txn-cur");
@@ -1431,10 +1431,10 @@ var Viamagus_Form_Loader = {
                     if (txnCurrency && txnCurrency != null && parseFloat(conversionRate) > 0) {
                         priceInTxnCur = parseFloat(price * conversionRate).toFixed(2);
                         $(e).attr("data-product-price-in-txn-cur", priceInTxnCur);
-                        $(e).find(".viamagus-product-price").html($.number(priceInTxnCur, 2));
+                        $(e).find(".wr-product__price").html($.number(priceInTxnCur, 2));
                     } else {
                         $(e).attr("data-product-price-in-txn-cur", price);
-                        $(e).find(".viamagus-product-price").html($.number(price, 2));
+                        $(e).find(".wr-product__price").html($.number(price, 2));
                     }
                     that.checkProductAvailability($(e));
                     if (qty > 0) {
@@ -1455,20 +1455,20 @@ var Viamagus_Form_Loader = {
                                 productSubtotalInTxnCur = parseFloat(qty * priceInTxnCur).toFixed(2);
                                 totalAmountToPayInTxnCur = totalAmountToPayInTxnCur + productSubtotalInTxnCur;
                                 $(e).attr("data-product-total-amount-in-txn-cur", productSubtotalInTxnCur);
-                                $(e).find(".viamagus-product-subtotal").html($.number(productSubtotalInTxnCur, 2));
+                                $(e).find(".wr-product__subtotal").html($.number(productSubtotalInTxnCur, 2));
                             } else {
                                 $(e).attr("data-product-total-amount-in-txn-cur", productSubtotal);
-                                $(e).find(".viamagus-product-subtotal").html($.number(productSubtotal, 2));
+                                $(e).find(".wr-product__subtotal").html($.number(productSubtotal, 2));
                             }
                         }
                     } else {
                         $(e).find("#productQty").val(0);
-                        $(e).find(".viamagus-product-subtotal").html("0.00");
+                        $(e).find(".wr-product__subtotal").html("0.00");
                         $(e).attr("data-product-total-amount", "0");
                     }
                 });
             } else {
-                $('.viamagus-allow-single-product-purchase').each(function(index, e) {
+                $('.wr-product--allow-single').each(function(index, e) {
                     var radioBtn = $(e).find("#productRadioButton");
                     var price = $(e).attr("data-product-price");
                     var qty = $(e).find("#productQty").val();
@@ -1478,10 +1478,10 @@ var Viamagus_Form_Loader = {
                     if (txnCurrency && txnCurrency != null && parseFloat(conversionRate) > 0) {
                         priceInTxnCur = parseFloat(price * conversionRate).toFixed(2);
                         $(e).attr("data-product-price-in-txn-cur", priceInTxnCur);
-                        $(e).find(".viamagus-product-price").html($.number(priceInTxnCur, 2));
+                        $(e).find(".wr-product__price").html($.number(priceInTxnCur, 2));
                     } else {
                         $(e).attr("data-product-price-in-txn-cur", price);
-                        $(e).find(".viamagus-product-price").html($.number(price, 2));
+                        $(e).find(".wr-product__price").html($.number(price, 2));
                     }
                     that.checkProductAvailability($(e));
                     if (radioBtn.is(":checked") && qty == 0) {
@@ -1502,14 +1502,14 @@ var Viamagus_Form_Loader = {
                                 productSubtotalInTxnCur = parseFloat(qty * priceInTxnCur).toFixed(2);
                                 totalAmountToPayInTxnCur = totalAmountToPayInTxnCur + productSubtotalInTxnCur;
                                 $(e).attr("data-product-total-amount-in-txn-cur", productSubtotalInTxnCur);
-                                $(e).find(".viamagus-product-subtotal").html($.number(productSubtotalInTxnCur, 2));
+                                $(e).find(".wr-product__subtotal").html($.number(productSubtotalInTxnCur, 2));
                             } else {
                                 $(e).attr("data-product-total-amount-in-txn-cur", productSubtotal);
-                                $(e).find(".viamagus-product-subtotal").html($.number(productSubtotal, 2));
+                                $(e).find(".wr-product__subtotal").html($.number(productSubtotal, 2));
                             }
                         }
                     } else {
-                        $(e).find(".viamagus-product-subtotal").html("0.00");
+                        $(e).find(".wr-product__subtotal").html("0.00");
                         $(e).attr("data-product-total-amount", "0");
                     }
                 });
@@ -1551,16 +1551,16 @@ var Viamagus_Form_Loader = {
                     $('#discountCode').attr("readonly", "readonly");
                     $('#removeDiscountCode').show();
                     $('#applyDiscountCode').hide();
-                    rowObj.find(".viamagus-product-subtotal").html($.number(amountToPay, 2));
+                    rowObj.find(".wr-product__subtotal").html($.number(amountToPay, 2));
                     rowObj.attr("data-product-total-amount", amountToPay);
                     rowObj.attr("data-discount-price", discountedPrice);
                     rowObj.attr("data-discount-code", $('#discountCode').val());
                     if (amountToPay != parseFloat(productPrice)) {
-                        rowObj.find(".viamagus-product-price").html($.number(discountedPrice, 2) + " <strike style='color:red'>(" + $.number(productPrice, 2) + ")</strike>");
+                        rowObj.find(".wr-product__price").html($.number(discountedPrice, 2) + " <strike style='color:red'>(" + $.number(productPrice, 2) + ")</strike>");
                     }
                 } else {
                     rowObj.attr("data-product-total-amount", amountToPay);
-                    rowObj.find(".viamagus-product-subtotal").html($.number(amountToPay, 2));
+                    rowObj.find(".wr-product__subtotal").html($.number(amountToPay, 2));
                     rowObj.attr("data-discount-price", "");
                     rowObj.attr("data-discount-code", "");
                 }
@@ -1574,12 +1574,12 @@ var Viamagus_Form_Loader = {
         }
     },
     calculateTotalAmountToPay: function() {
-        var allowMultiple = $('.viamagus-form-products').attr("data-allow-multiple-products");
+        var allowMultiple = $('.wr-form__products').attr("data-allow-multiple-products");
         var totalAmountToPay = 0;
         var totalAmountToPayInTxnCur = 0;
         var isDiscountApplied = false;
         if (allowMultiple == "true") {
-            $('.viamagus-allow-multiple-products-purchase').each(function(index, e) {
+            $('.wr-product--allow-multiple').each(function(index, e) {
                 var checkBox = $(e).find("#productCheckBox");
                 var qty = $(e).find("#productQty").val();
                 if (checkBox.is(":checked") && qty > 0) {
@@ -1595,7 +1595,7 @@ var Viamagus_Form_Loader = {
                 }
             });
         } else {
-            $('.viamagus-allow-single-product-purchase').each(function(index, e) {
+            $('.wr-product--allow-single').each(function(index, e) {
                 var radioBtn = $(e).find("#productRadioButton");
                 var qty = $(e).find("#productQty").val();
                 if (radioBtn.is(":checked") && qty > 0) {
@@ -1629,11 +1629,11 @@ var Viamagus_Form_Loader = {
     },
     _validateProductDetails: function() {
         var isProductSelected = false;
-        if ($('.viamagus-form-products').length) {
-            var allowMultiple = $('.viamagus-form-products').attr("data-allow-multiple-products");
+        if ($('.wr-form__products').length) {
+            var allowMultiple = $('.wr-form__products').attr("data-allow-multiple-products");
             var totalAmountToPay = 0;
             if (allowMultiple == "true") {
-                $('.viamagus-allow-multiple-products-purchase').each(function(index, e) {
+                $('.wr-product--allow-multiple').each(function(index, e) {
                     var checkBox = $(e).find("#productCheckBox");
                     var qty = $(e).find("#productQty").val();
                     if (checkBox.is(":checked") && qty > 0) {
@@ -1641,7 +1641,7 @@ var Viamagus_Form_Loader = {
                     }
                 });
             } else {
-                $('.viamagus-allow-single-product-purchase').each(function(index, e) {
+                $('.wr-product--allow-single').each(function(index, e) {
                     var radioBtn = $(e).find("#productRadioButton");
                     var qty = $(e).find("#productQty").val();
                     if (radioBtn.is(":checked") && qty > 0) {
@@ -1664,11 +1664,11 @@ var Viamagus_Form_Loader = {
         return true;
     },
     _registerProductCalculataionEvent: function(formId, baseCurrency) {
-        $('.viamagus-product-qty').unbind();
+        $('.wr-product__qty').unbind();
         var that = this;
         that._calculateProductAmount(formId, baseCurrency);
         that._loadFormProductQtyInfo(formId, baseCurrency)
-        $('.viamagus-product-qty').change(function(e) {
+        $('.wr-product__qty').change(function(e) {
             $(this).val(Math.abs($(this).val()));
             var minQty = $(this).attr("data-min-order-qty");
             var maxQty = $(this).attr("data-max-order-qty");
@@ -1684,7 +1684,7 @@ var Viamagus_Form_Loader = {
             }
             that._calculateProductAmount(formId, baseCurrency);
         });
-        $('.viamagus-product-select').change(function(e) {
+        $('.wr-product__select').change(function(e) {
             $('#discountCode').val('');
             $('#discountCode').removeAttr("readonly");
             $('#removeDiscountCode').hide();
@@ -1693,7 +1693,7 @@ var Viamagus_Form_Loader = {
             $('.vm-discount-failure').hide();
             that._calculateProductAmount(formId, baseCurrency);
         });
-        $('.viamagus-discount-checkbox').change(function(e) {
+        $('.wr-discount__checkbox').change(function(e) {
             $('#removeDiscountCode').hide();
             $('#applyDiscountCode').show();
             if ($(this).is(':checked')) {
@@ -1724,12 +1724,12 @@ var Viamagus_Form_Loader = {
     _buildProductJSON: function() {
         var productJSON = "";
         var prodcutName = "";
-        if ($('.viamagus-form-products').length) {
+        if ($('.wr-form__products').length) {
             productJSON = '{"products":[';
-            var allowMultiple = $('.viamagus-form-products').attr("data-allow-multiple-products");
+            var allowMultiple = $('.wr-form__products').attr("data-allow-multiple-products");
             var totalAmountToPay = 0;
             if (allowMultiple == "true") {
-                $('.viamagus-allow-multiple-products-purchase').each(function(index, e) {
+                $('.wr-product--allow-multiple').each(function(index, e) {
                     var checkBox = $(e).find("#productCheckBox");
                     var qty = $(e).find("#productQty").val();
                     if (checkBox.is(":checked") && qty > 0) {
@@ -1740,7 +1740,7 @@ var Viamagus_Form_Loader = {
                 prodcutName = prodcutName.substring(0, prodcutName.length - 2);
                 productJSON = productJSON.substring(0, productJSON.length - 1);
             } else {
-                $('.viamagus-allow-single-product-purchase').each(function(index, e) {
+                $('.wr-product--allow-single').each(function(index, e) {
                     var radioBtn = $(e).find("#productRadioButton");
                     var qty = $(e).find("#productQty").val();
                     if (radioBtn.is(":checked") && qty > 0) {
@@ -1780,9 +1780,9 @@ var Viamagus_Form_Loader = {
             jsonp: 'jsonCallback'
         }).done(function(data) {
             if (data.result && data.result.length) {
-                $('.viamagus-checkout-summary').show();
-                $('.viamagus-product-info').hide();
-                $('#viamagus-order-summary-body').empty();
+                $('.wr-checkout__summary').show();
+                $('.wr-product__info').hide();
+                $('#wr-checkout__order-summary').empty();
                 for (var i = 0; i < data.result.length; i++) {
                     var product = data.result[i];
                     var currencySymbol = ' ';
@@ -1801,8 +1801,8 @@ var Viamagus_Form_Loader = {
                             $('.vm-form-payment-currency-symbol').html('');
                             $('.vm-form-payment-currency-code').html(currencyCode);
                         }
-                        $('.viamagus-form-product-summary').show();
-                        var productRow = '<tr class="viamagus-product-summary-row" > ';
+                        $('.wr-form__product-summary').show();
+                        var productRow = '<tr class="wr-product__summary-row" > ';
                         productRow = productRow + '<td data-title="Product Name">' + product.productName + '</td>';
                         if (product.discountAmount != null && product.discountAmount != "") {
                             productRow = productRow + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="vm-format-number">' + product.discountAmount + '</span> <strike style="color:red;">(<span class="vm-format-number">' + productPrice + '</span>) ' + currencyCode + '</strike></td>';
@@ -1811,14 +1811,14 @@ var Viamagus_Form_Loader = {
                         }
                         productRow = productRow + '<td class="numeric" data-title="Quantity">' + product.productQty + '</td>';
                         productRow = productRow + '<td class="numeric sub-total"><b>' + currencySymbol + '<span class="vm-format-number row-subtotal">' + productAmount + '</span> ' + currencyCode + '</b></td> <tr>';
-                        $('#viamagus-order-summary-body').append(productRow);
+                        $('#wr-checkout__order-summary').append(productRow);
                         $('#checkOutSummaryTotalNumber').html(data.result[0].totalAmount);
                         if (data.result[0].discountCode != "") {
                             $('#checkOutSummaryDiscountRow').show();
                             $('#checkOutDiscountCode').html(data.result[0].discountCode);
                         }
                     } else {
-                        $('.viamagus-custom-payment-summary').show();
+                        $('.wr-form__payment-summary').show();
                         $('.vm-form-submit-ref-id').html(product.txnId);
                         if ($('.vm-form-custom-payment-currency-code').length) {
                             if ($('#paymentCurrency').val() != '') {
@@ -1847,8 +1847,8 @@ var Viamagus_Form_Loader = {
         }).done(function(data) {
             if (data.result && data.result.length) {
                 that.initOnPaymentModeEcommChangeEvent();
-                $('#viamagus-shopping-cart-table-content').empty();
-                $('.viamagus-product-info').hide();
+                $('#wr-shopping-cart__table').empty();
+                $('.wr-product__info').hide();
                 var currencySymbol = 'Rs. ';
                 var currencyCode = '';
                 for (var i = 0; i < data.result.length; i++) {
@@ -1868,18 +1868,18 @@ var Viamagus_Form_Loader = {
                         totalAmount = data.result[i].totalAmountInTransactionCurrency;
                         discountAmount = data.result[i].discountAmountInTransactCurrency;
                     }
-                    var cartItemHtml = '<tr class="viamagus-cart-item-row data-product-id="' + data.result[i].productId + '">';
+                    var cartItemHtml = '<tr class="wr-cart__item-row data-product-id="' + data.result[i].productId + '">';
                     cartItemHtml = cartItemHtml + '<td data-title="Product Name">' + data.result[i].productName + '</td>';
-                    cartItemHtml = cartItemHtml + '<td><a class="viamagus-image-lightbox" href="#"><img class="viamagus-product-image-url" style="width:50px;height:auto;" src="' + data.result[i].productImageUrl + '"></a></td>';
-                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="viamagus-product-price viamagus-format-number">';
+                    cartItemHtml = cartItemHtml + '<td><a class="wr-lightbox--image" href="#"><img class="wr-product__image-url" style="width:50px;height:auto;" src="' + data.result[i].productImageUrl + '"></a></td>';
+                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="wr-product__price wr-format--number">';
                     cartItemHtml = cartItemHtml + ' ' + productPrice + '</span> ' + currencyCode;
                     if (data.result[i].hasOwnProperty('weightUnit') && data.result[i].weightUnit != null) {
                         cartItemHtml = cartItemHtml + '/' + data.result[i].weightUnit + '</td>';
                     }
                     cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Quantity">' + data.result[i].productQty + '</td>';
-                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" ><b>' + currencySymbol + '<span class="viamagus-product-subtotal row-subtotal viamagus-format-number">' + productAmount + '</span> ' + currencyCode + ' </b></td>';
+                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" ><b>' + currencySymbol + '<span class="wr-product__subtotal row-subtotal wr-format--number">' + productAmount + '</span> ' + currencyCode + ' </b></td>';
                     cartItemHtml = cartItemHtml + '</tr>';
-                    $('#viamagus-shopping-cart-table-content').append(cartItemHtml);
+                    $('#wr-shopping-cart__table').append(cartItemHtml);
                     $('#shoppingCartTotal').html(totalAmount);
                     $('#paymentAmount').attr("data-payment-amount", totalAmount);
                     $('.vm-currency-symbol').html(currencySymbol);
@@ -1891,7 +1891,7 @@ var Viamagus_Form_Loader = {
                     }
                 }
             }
-            $('.viamagus-format-number').number(true, 2);
+            $('.wr-format--number').number(true, 2);
         });
     },
     loadFormPaymentModes: function() {
@@ -1908,11 +1908,11 @@ var Viamagus_Form_Loader = {
         }).done(function(data) {
             if (data.result) {
                 var paymentOption = data.result.split(",");
-                $('.viamagus-payment-mode-payu').hide();
+                $('.wr-payment__mode--payu').hide();
                 for (var i = 0; i < paymentOption.length; i++) {
                     var paymentMode = paymentOption[i];
-                    if ($('.viamagus-payment-mode-' + option.toLowerCase()).length) {
-                        $('.viamagus-payment-mode-' + option.toLowerCase()).show();
+                    if ($('.wr-payment__mode-' + option.toLowerCase()).length) {
+                        $('.wr-payment__mode-' + option.toLowerCase()).show();
                     }
                 }
                 if (data.result.indexOf(",") == -1) {
@@ -1935,11 +1935,11 @@ var Viamagus_Form_Loader = {
         }).done(function(data) {
             if (data.result && data.result != "") {
                 var paymentOption = JSON.parse(data.result);
-                $('.viamagus-payment-mode-payu').hide();
+                $('.wr-payment__mode--payu').hide();
                 for (var i = 0; i < paymentOption.length; i++) {
                     var option = paymentOption[i].paymentMode;
-                    if ($('.viamagus-payment-mode-' + option).length) {
-                        $('.viamagus-payment-mode-' + option).show();
+                    if ($('.wr-payment__mode-' + option).length) {
+                        $('.wr-payment__mode-' + option).show();
                     }
                 }
             }
@@ -1993,29 +1993,29 @@ var Viamagus_Form_Loader = {
                         discountAmount = data.result[i].discountAmountInTransactCurrency;
                         additionalCharge = data.result[i].additionalChargeInTransactCurrency;
                     }
-                    var cartItemHtml = '<tr class="viamagus-cart-item-row" >';
+                    var cartItemHtml = '<tr class="wr-cart__item-row" >';
                     cartItemHtml = cartItemHtml + '<td data-title="Product Name">' + data.result[i].productName + '</td>';
-                    cartItemHtml = cartItemHtml + '<td><a class="viamagus-image-lightbox" href="#"><img class="viamagus-product-image-url" style="width:50px;height:auto;" src="' + data.result[i].productImageUrl + '"></a></td>';
-                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="viamagus-product-price viamagus-format-number">';
+                    cartItemHtml = cartItemHtml + '<td><a class="wr-lightbox--image" href="#"><img class="wr-product__image-url" style="width:50px;height:auto;" src="' + data.result[i].productImageUrl + '"></a></td>';
+                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="wr-product__price wr-format--number">';
                     cartItemHtml = cartItemHtml + ' ' + productPrice + '</span>  ' + currencyCode;
                     if (data.result[i].hasOwnProperty('weightUnit') && data.result[i].weightUnit != null) {
                         cartItemHtml = cartItemHtml + '/' + data.result[i].weightUnit + '</td>';
                     }
                     cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Quantity">' + data.result[i].productQty + '</td>';
-                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" ><b>' + currencySymbol + '<span class="viamagus-product-subtotal row-subtotal viamagus-format-number">' + productAmount + '</span> ' + currencyCode + '</b></td>';
+                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" ><b>' + currencySymbol + '<span class="wr-product__subtotal row-subtotal wr-format--number">' + productAmount + '</span> ' + currencyCode + '</b></td>';
                     cartItemHtml = cartItemHtml + '</tr>';
                     $('#order-summary-body').append(cartItemHtml);
                 }
                 if (data.result[0].discountCode != null && data.result[0].discountCode != "") {
                     $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Discount Code : ' + data.result[0].discountCode + '</td></tr>');
-                    $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Discount Amount : ' + currencySymbol + '<span class="viamagus-format-number"> ' + discountAmount + '</span> ' + currencyCode + '</b></td></tr>');
+                    $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Discount Amount : ' + currencySymbol + '<span class="wr-format--number"> ' + discountAmount + '</span> ' + currencyCode + '</b></td></tr>');
                 }
                 if (additionalCharge != null && additionalCharge != "") {
-                    $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Additional Charge : ' + currencySymbol + '<span class="viamagus-format-number"> ' + additionalCharge + '</span> ' + currencyCode + '</b></td></tr>');
+                    $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Additional Charge : ' + currencySymbol + '<span class="wr-format--number"> ' + additionalCharge + '</span> ' + currencyCode + '</b></td></tr>');
                 }
-                $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Total Amount : ' + currencySymbol + '<span class="viamagus-format-number"> ' + totalAmount + '</span> ' + currencyCode + '</b></td></tr>');
+                $('#order-summary-body').append('<tr><td colspan="5"  style="text-align:right;"><b>Total Amount : ' + currencySymbol + '<span class="wr-format--number"> ' + totalAmount + '</span> ' + currencyCode + '</b></td></tr>');
             }
-            $('.viamagus-format-number').number(true, 2);
+            $('.wr-format--number').number(true, 2);
             Viamagus_Cart_Manager.resetCart();
         });
     },
@@ -2061,8 +2061,8 @@ var Viamagus_Form_Loader = {
                                     $('.vm-form-payment-currency-code').html(currencyCode);
                                 }
                             }
-                            $('.viamagus-form-product-summary').show();
-                            var productRow = '<tr class="viamagus-product-summary-row" > ';
+                            $('.wr-form__product-summary').show();
+                            var productRow = '<tr class="wr-product__summary-row" > ';
                             productRow = productRow + '<td data-title="Product Name">' + product.productName + '</td>';
                             if (product.discountAmount != null && product.discountAmount != "") {
                                 productRow = productRow + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="vm-format-number">' + product.discountAmount + '</span> <strike style="color:red;">(<span class="vm-format-number">' + productPrice + '</span>) ' + currencyCode + '</strike></td>';
@@ -2116,7 +2116,7 @@ var Viamagus_Form_Loader = {
             status: status
         });
         if (typeof PayU != "undefined") {
-            $('.viamagus_header').hide();
+            $('.wr-component--header').hide();
             if (status == 'success') {
                 PayU.onSuccess(input);
             }
@@ -2126,8 +2126,8 @@ var Viamagus_Form_Loader = {
         }
     },
     _initGoogleMap: function() {
-        if ($('.viamagus-form-google-map').length) {
-            $('.viamagus-form-google-map').each(function(index, e) {
+        if ($('.wr-form__google-map').length) {
+            $('.wr-form__google-map').each(function(index, e) {
                 var searchInputField = $(e).find('.search-input');
                 var googleMapPlaceHolder = '#' + searchInputField.attr("data-comp-id") + "_Map";
                 var searchbutton = $(e).find('.search-button');
@@ -2156,17 +2156,17 @@ var Viamagus_Form_Loader = {
         }
     },
     _initAddressCountryStateCityLoad: function() {
-        if ($('.viamagus-address').length) {
+        if ($('.wr-address').length) {
             this.loadMasterCountryStateCityList();
         }
-        if ($('.viamagus-address-clear-values').length) {
+        if ($('.wr-address__clear').length) {
             this.initClearAddressEvent();
         }
     },
     _initAddressOnchangeEvent: function() {
-        $('.viamagus-address-input').unbind();
-        $('.viamagus-address-input').change(function(e) {
-            $('.viamagus-address').each(function(index, e) {
+        $('.wr-address__input').unbind();
+        $('.wr-address__input').change(function(e) {
+            $('.wr-address').each(function(index, e) {
                 var captureMap = $(e).attr("data-capture-map");
                 var compId = '#' + $(e).attr("data-comp-id");
                 if (captureMap == "true") {
@@ -2184,7 +2184,7 @@ var Viamagus_Form_Loader = {
     },
     _initOTPGenerateEvents: function() {
         var that = this;
-        if ($('.viamagus-otp-section').length) {
+        if ($('.wr-otp__section').length) {
             $('.generate-otp-button').unbind();
             $('.generate-otp-button').click(function(e) {
                 var customerPhoneFieldId = $(this).attr("data-phone-id");
@@ -2196,8 +2196,8 @@ var Viamagus_Form_Loader = {
                 that.sendOtpToCustomer(phoneNo, customerPhoneFieldId, $(this));
                 $(this).text("Resend OTP");
             });
-            $('.viamagus-otp-input-validate').unbind();
-            $('.viamagus-otp-input-validate').click(function(e) {
+            $('.wr-otp__input').unbind();
+            $('.wr-otp__input').click(function(e) {
                 var customerPhoneFieldId = $(this).attr("data-phone-id");
                 var userEnteredOTP = $('#' + customerPhoneFieldId + '-otp').val();
                 that.validateOTPEnteredByCustomer(userEnteredOTP, customerPhoneFieldId, $(this))
@@ -2206,7 +2206,7 @@ var Viamagus_Form_Loader = {
     },
     _initEmailOTPGenerateEvents: function() {
         var that = this;
-        if ($('.viamagus-email-otp-section').length) {
+        if ($('.wr-otp__section--email').length) {
             $('.generate-email-otp-button').unbind();
             $('.generate-email-otp-button').click(function(e) {
                 var customerEmailFieldId = $(this).attr("data-email-id");
@@ -2218,8 +2218,8 @@ var Viamagus_Form_Loader = {
                 that.sendEmailOtpToCustomer(emailId, customerEmailFieldId, $(this));
                 $(this).text("Resend OTP");
             });
-            $('.viamagus-email-otp-input-validate').unbind();
-            $('.viamagus-email-otp-input-validate').click(function(e) {
+            $('.wr-otp__input--email').unbind();
+            $('.wr-otp__input--email').click(function(e) {
                 var customerEmailFieldId = $(this).attr("data-email-id");
                 var userEnteredOTP = $('#' + customerEmailFieldId + '-email-otp').val();
                 that.validateEmailOTPEnteredByCustomer(userEnteredOTP, customerEmailFieldId, $(this))
@@ -2373,8 +2373,8 @@ var Viamagus_Form_Loader = {
     },
     _initGoogleDistanceCalculator: function() {
         var that = this;
-        if ($('.viamagus-form-google-distance-calculator').length) {
-            $('.viamagus-form-google-distance-calculator').each(function(index, e) {
+        if ($('.wr-form__google-distance').length) {
+            $('.wr-form__google-distance').each(function(index, e) {
                 var compId = $(e).attr("data-comp-id");
                 var sourceLocationObj = $('#' + compId + "_Source");
                 var destinationLocationObj = $('#' + compId + "_Destination");
@@ -2823,8 +2823,8 @@ var Viamagus_Form_Loader = {
         }
     },
     initClearAddressEvent: function() {
-        $('.viamagus-address-clear-values').unbind();
-        $('.viamagus-address-clear-values').click(function(e) {
+        $('.wr-address__clear').unbind();
+        $('.wr-address__clear').click(function(e) {
             e.preventDefault();
             var fieldId = $(this).attr("data-field-id");
             $('#' + fieldId + '_Line_One').val('');
@@ -2873,14 +2873,14 @@ var Viamagus_Form_Loader = {
                         productRowObj.find('.vm-product-available-msg').remove();
                     }
                     if (product.availableQty == 0) {
-                        $('<p class="vm-product-available-msg" style="color:red;"> SOLD OUT </p>').insertAfter(productRowObj.find('.viamagus-product-qty'));
+                        $('<p class="vm-product-available-msg" style="color:red;"> SOLD OUT </p>').insertAfter(productRowObj.find('.wr-product__qty'));
                         productRowObj.find("#productQty").val(0);
                         if (productRowObj.find("#productCheckBox").length) {
                             productRowObj.find("#productCheckBox").removeAttr("checked");
                             productRowObj.find("#productCheckBox").attr("disabled", "disabled");
                         }
                     } else if (qty > product.availableQty) {
-                        $('<p class="vm-product-available-msg" style="color:red;"> AVAILABLE: ' + product.availableQty + ' </p>').insertAfter(productRowObj.find('.viamagus-product-qty'));
+                        $('<p class="vm-product-available-msg" style="color:red;"> AVAILABLE: ' + product.availableQty + ' </p>').insertAfter(productRowObj.find('.wr-product__qty'));
                         productRowObj.find("#productQty").val(product.availableQty);
                     }
                 }

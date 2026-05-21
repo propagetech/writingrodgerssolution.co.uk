@@ -23,7 +23,7 @@
 }
 
 #menu .navbar-inner,
-#menu .viamagus-component-content.navbar {
+#menu .wr-component__content.navbar {
   font-family: 'Quicksand', sans-serif !important;
 }
 
@@ -33,14 +33,14 @@
 }
 
 /* M3 navigation — https://m3.material.io/components/navigation-drawer */
-#menu .viamagus-menu-top-row {
+#menu .wr-component__menu-top-row {
   display: none !important;
 }
 
 @media (max-width: 979px) {
   /* M3 top app bar (fixed 64px) + menu panel expands downward */
   #menu,
-  #menu .viamagus-component-bg-colour,
+  #menu .wr-component__bg,
   #menu .wr-m3-app-bar {
     height: 64px !important;
     min-height: 64px !important;
@@ -54,7 +54,7 @@
     overflow: visible;
   }
 
-  #menu .viamagus-component-bg-colour,
+  #menu .wr-component__bg,
   #menu .wr-m3-app-bar {
     padding: 0 !important;
     margin: 0 !important;
@@ -161,7 +161,7 @@
     transform: rotate(-45deg);
   }
 
-  #menu .viamagus-business-logo {
+  #menu .wr-business-logo {
     order: 1;
     flex: 0 1 auto;
     min-width: 0;
@@ -170,7 +170,7 @@
     text-align: left !important;
   }
 
-  #menu .viamagus-business-logo .brand {
+  #menu .wr-business-logo .brand {
     display: flex;
     align-items: center;
     float: none !important;
@@ -179,7 +179,7 @@
     text-align: left !important;
   }
 
-  #menu .viamagus-business-logo .brand img {
+  #menu .wr-business-logo .brand img {
     max-width: 100px !important;
     max-height: 48px !important;
     width: auto !important;
@@ -391,10 +391,10 @@
     margin-bottom: 0;
   }
 
-  /* Override legacy viamagus_header + Bootstrap nav-collapse submenu styles */
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu > li > a,
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu li a,
-  .viamagus_header .navbar-inverse .wr-m3-navigation-drawer .dropdown-menu li a {
+  /* Override legacy wr-component--header + Bootstrap nav-collapse submenu styles */
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu > li > a,
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu li a,
+  .wr-component--header .navbar-inverse .wr-m3-navigation-drawer .dropdown-menu li a {
     position: relative;
     display: flex !important;
     align-items: center !important;
@@ -427,10 +427,10 @@
       var(--md-sys-motion-easing-standard);
   }
 
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu > li > a:hover,
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu > li > a:focus,
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu li a:hover,
-  .viamagus_header .wr-m3-navigation-drawer .dropdown-menu li a:focus {
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu > li > a:hover,
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu > li > a:focus,
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu li a:hover,
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu li a:focus {
     color: var(--md-sys-color-on-surface) !important;
     background: rgba(255, 255, 255, var(--md-sys-state-hover-opacity)) !important;
   }
@@ -472,7 +472,7 @@
   }
 
   #menu,
-  #menu .viamagus-component-bg-colour,
+  #menu .wr-component__bg,
   #menu .wr-m3-app-bar,
   #menu .navbar-inner,
   #menu .wr-m3-app-bar__row {
@@ -486,8 +486,8 @@
     display: none !important;
   }
 
-  /* Override legacy .viamagus_header table layout (internal-styles.css) */
-  #menu.viamagus_header .navbar-inner,
+  /* Override legacy .wr-component--header table layout (internal-styles.css) */
+  #menu.wr-component--header .navbar-inner,
   #menu .navbar-inner {
     display: flex !important;
     flex-wrap: nowrap !important;
@@ -501,7 +501,7 @@
     box-sizing: border-box;
   }
 
-  #menu.viamagus_header .menu-center,
+  #menu.wr-component--header .menu-center,
   #menu .menu-center,
   #menu .wr-m3-app-bar__row {
     display: flex !important;
@@ -519,7 +519,7 @@
     align-items: center;
   }
 
-  #menu .viamagus-business-logo {
+  #menu .wr-business-logo {
     order: 0;
     margin: 0 !important;
     float: none !important;
@@ -557,7 +557,7 @@
     overflow: visible !important;
   }
 
-  #menu.viamagus_header .wr-m3-navigation-drawer .nav,
+  #menu.wr-component--header .wr-m3-navigation-drawer .nav,
   #menu .wr-m3-navigation-drawer .nav,
   body > .wr-m3-navigation-drawer .nav {
     display: flex !important;
@@ -574,7 +574,7 @@
     width: auto !important;
   }
 
-  #menu.viamagus_header .wr-m3-navigation-drawer .nav > li,
+  #menu.wr-component--header .wr-m3-navigation-drawer .nav > li,
   #menu .wr-m3-navigation-drawer .nav > li,
   body > .wr-m3-navigation-drawer .nav > li {
     float: none !important;
@@ -584,7 +584,7 @@
     width: auto !important;
   }
 
-  #menu.viamagus_header .wr-m3-navigation-drawer .nav > li > a,
+  #menu.wr-component--header .wr-m3-navigation-drawer .nav > li > a,
   #menu .wr-m3-navigation-drawer .nav > li > a,
   body > .wr-m3-navigation-drawer .nav > li > a {
     display: inline-block !important;
@@ -1041,7 +1041,7 @@
   }
 }
 
-.viamagusPageSettings .button-align .btn[href*="wa.me"] {
+.wr-page .button-align .btn[href*="wa.me"] {
   background: #25d366 !important;
   border-color: #25d366 !important;
   color: #fff !important;
@@ -1051,18 +1051,18 @@
   padding: 12px 24px;
 }
 
-.viamagusPageSettings .button-align .btn[href*="wa.me"]:hover {
+.wr-page .button-align .btn[href*="wa.me"]:hover {
   background: #1fb855 !important;
   border-color: #1fb855 !important;
 }
 
 /* Hide duplicate CTA in first legacy block when sub-hero is present */
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-component .button-align {
+.wr-page .wr-sub-hero ~ .wr-component .button-align {
   display: none !important;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ link ~ .viamagus-component .button-align,
-.viamagusPageSettings .wr-sub-hero ~ link ~ link ~ .viamagus-component .button-align {
+.wr-page .wr-sub-hero ~ link ~ .wr-component .button-align,
+.wr-page .wr-sub-hero ~ link ~ link ~ .wr-component .button-align {
   display: none !important;
 }
 
@@ -1076,7 +1076,7 @@
 }
 
 /* Legacy subpage blocks (until each page is refactored) */
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-image-text .featurette-image.pull-left {
+.wr-page .wr-sub-hero ~ .wr-component--image-text .featurette-image.pull-left {
   float: none !important;
   width: 100% !important;
   max-width: 480px;
@@ -1084,29 +1084,29 @@
   display: block;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-image-text .content-container {
+.wr-page .wr-sub-hero ~ .wr-component--image-text .content-container {
   max-width: 720px;
   margin: 0 auto;
   padding: 0 8px;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-image-text .featurette-heading {
+.wr-page .wr-sub-hero ~ .wr-component--image-text .featurette-heading {
   font-family: 'Playfair Display', serif;
   color: #010038 !important;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-image-text .lead {
+.wr-page .wr-sub-hero ~ .wr-component--image-text .lead {
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #403f3b;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext .viamagus-component-bg-colour {
+.wr-page .wr-sub-hero ~ .wr-component--richtext .wr-component__bg {
   background: #f6f5f2 !important;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext .viamagus-paragraph {
+.wr-page .wr-sub-hero ~ .wr-component--richtext .wr-paragraph {
   max-width: 720px;
   margin: 0 auto;
   padding: 8px 16px 24px;
@@ -1116,16 +1116,16 @@
   color: #403f3b !important;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext span[style],
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext strong {
+.wr-page .wr-sub-hero ~ .wr-component--richtext span[style],
+.wr-page .wr-sub-hero ~ .wr-component--richtext strong {
   color: inherit !important;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext ul {
+.wr-page .wr-sub-hero ~ .wr-component--richtext ul {
   padding-left: 1.25em;
 }
 
-.viamagusPageSettings .wr-sub-hero ~ .viamagus-richtext li {
+.wr-page .wr-sub-hero ~ .wr-component--richtext li {
   margin-bottom: 10px;
 }
 
@@ -1865,7 +1865,7 @@
   box-sizing: border-box;
 }
 
-.viamagusPageSettings .well {
+.wr-page .well {
   padding: 0 !important;
 }
 

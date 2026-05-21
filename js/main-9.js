@@ -772,7 +772,7 @@ $.extend( $.validator, {
 					this.settings.errorPlacement( place, $( element ) );
 				} else {
 					$(element).css("border", "1px solid red");
-					if ($(element).hasClass("viamagus-date-picker")) {
+					if ($(element).hasClass("wr-date-picker")) {
 					   place.insertAfter( $(element).parent() );
 					 }else{
               		   place.insertAfter( element );

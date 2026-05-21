@@ -50,8 +50,8 @@
     /* Default fonts: Playfair Display for headings, Quicksand for body (change_default_fonts.py) */
     body,
     html,
-    .viamagusPageSettings,
-    .viamagusPageSettings .viamagus-container {
+    .wr-page,
+    .wr-page .wr-page__container {
       font-family: 'Quicksand', sans-serif;
     }
 
@@ -61,21 +61,21 @@
     h4,
     h5,
     h6,
-    .viamagus-heading1,
-    .viamagus-heading2,
-    .viamagus-heading3,
-    .viamagus-section-heading {
+    .wr-heading-1,
+    .wr-heading-2,
+    .wr-heading-3,
+    .wr-section__heading {
       font-family: 'Playfair Display', serif;
     }
 
     /* Home page: desktop spacing rhythm (min-width matches nav breakpoint) */
     @media (min-width: 980px) {
-      #viamagus_Image_Text_7952 .viamagus-component-content {
+      #wr-image-text-7952 .wr-component__content {
         padding-top: 48px !important;
         padding-bottom: 48px !important;
       }
 
-      #viamagus_Embed_Code_6729 .viamagus-component-content {
+      #wr-embed-6729 .wr-component__content {
         padding-top: 40px !important;
         padding-bottom: 48px !important;
       }
@@ -128,12 +128,12 @@
   <script>
     function loadViaBkgImage() { if ($('.backstretch').length) { $.backstretch('destroy', false); } }
   </script>
-  <div class="viamagusPageSettings">
-    <div class="viamagus-container">
+  <div class="wr-page">
+    <div class="wr-page__container">
       <link href="css/main-3.css" rel="stylesheet" type="text/css" />
-      <div class="viamagus-component viamagus_header" data-component-name="Menu" data-sticky-header="true" id="menu">
-        <div class="viamagus-component-bg-colour" style="background-color: rgba(1,0,56,1)">
-          <div class="viamagus-component-content navbar navbar-inverse wr-m3-app-bar" style="padding-top: 0px; padding-bottom: 1px; padding-left: 20px; padding-right: 20px; font-family: Open Sans">
+      <div class="wr-component wr-component--header" data-component-name="Menu" data-sticky-header="true" id="menu">
+        <div class="wr-component__bg" style="background-color: rgba(1,0,56,1)">
+          <div class="wr-component__content navbar navbar-inverse wr-m3-app-bar" style="padding-top: 0px; padding-bottom: 1px; padding-left: 20px; padding-right: 20px; font-family: Open Sans">
             <div class="navbar-inner" data-bkg-color="rgba(1,0,56,1)" data-transparent-menu-cover-mode="false">
               <div class="container menu-center wr-m3-app-bar__row">
                 <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
@@ -144,7 +144,7 @@
                   <span class="icon-bar">
                   </span>
                 </button>
-                <div class="viamagus-business-logo" itemscope="" itemtype="http://schema.org/Organization">
+                <div class="wr-business-logo" itemscope="" itemtype="http://schema.org/Organization">
                   <a class="brand" href="./" itemprop="url">
                     <img alt="logo" itemprop="logo" src="imgs/logo.webp" style="width: 179px" />
                   </a>
@@ -241,17 +241,17 @@
           </div>
         </div>
       </section>
-      <div class="viamagus-component viamagus-image-text container-fluid" data-bkg-image="" data-component-name="Image Text" id="viamagus_Image_Text_7952">
-        <div class="viamagus-component-bg-colour">
-          <div class="viamagus-component-content" style="padding-top: 32px; padding-bottom: 32px">
+      <div class="wr-component wr-component--image-text container-fluid" data-bkg-image="" data-component-name="Image Text" id="wr-image-text-7952">
+        <div class="wr-component__bg">
+          <div class="wr-component__content" style="padding-top: 32px; padding-bottom: 32px">
             <div class="row-fluid">
               <div class="featurette">
                 <div>
                   <div class="content-container">
-                    <h2 class="viamagus-heading2 featurette-heading">
+                    <h2 class="wr-heading-2 featurette-heading">
                       <span style="font-size: 24px">Essays, reports, dissertations &amp; exam prep: one team</span>
                     </h2>
-                    <div class="lead viamagus-paragraph">
+                    <div class="lead wr-paragraph">
                       From nursing case studies to SPSS dissertations and MBA reports, we cover management, law, finance, IT, literature, and more. You work with the same approachable team students have used since 2017, not a faceless ticket queue.
                     </div>
                   </div>
@@ -289,8 +289,8 @@
           <li>Essays, reports, dissertations, tutoring &amp; exam prep</li>
         </ul>
       </section>
-      <div class="viamagus-component container-fluid viamagus-embedCode" data-component-name="Embed Code" id="viamagus_Embed_Code_6729">
-        <div class="viamagus-component-content" style="padding: 24px 24px 40px; max-width: 900px; margin: 0 auto;">
+      <div class="wr-component container-fluid wr-component--embed" data-component-name="Embed Code" id="wr-embed-6729">
+        <div class="wr-component__content" style="padding: 24px 24px 40px; max-width: 900px; margin: 0 auto;">
           <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="400"
             src="https://www.youtube.com/embed/Q9FcPMMJn4M" title="Writing Rodgers student support" width="100%" style="max-width: 100%; border-radius: 8px;">
           </iframe>
@@ -434,14 +434,14 @@
           <p class="wr-contact-legal"><strong>Registered entity:</strong> Writing Rodgers Solution LLP is incorporated in India with the Ministry of Corporate Affairs (ROC Kolkata; LLPIN AAY-5206). Registered office: 3rd Floor, Flat A3, BE1/5 Deshbandhu Nagar North, Kolkata, West Bengal 700059, India.</p>
         </div>
       </section>
-      <div class="viamagus-component viamagus-spacer">
-        <div class="viamagus-component-bg-colour" style="height: 20px">
+      <div class="wr-component wr-component--spacer">
+        <div class="wr-component__bg" style="height: 20px">
         </div>
       </div>
-      <footer class="viamagus-component viamagus_footer" data-bkg-image="" data-component-name="Footer" id="viamagus_Footer_5319">
-        <div class="viamagus-component-bg-colour" style="background: rgba(237,237,237,1)">
-          <div class="viamagus-component-content">
-            <div class="row-fluid viamagus-paragraph">
+      <footer class="wr-component wr-component--footer" data-bkg-image="" data-component-name="Footer" id="wr-footer-5319">
+        <div class="wr-component__bg" style="background: rgba(237,237,237,1)">
+          <div class="wr-component__content">
+            <div class="row-fluid wr-paragraph">
               <div class="span3">
               </div>
               <div class="span6">

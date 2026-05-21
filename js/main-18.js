@@ -5511,9 +5511,9 @@ function viamagusEcomListing(isProductPage, container) {
     this.buttonType = '',
     this.categoryId = '',
     this.contextPath = '',
-    this.cartCountPlaceHolder = '.viamagus-cart-count',
-    this.productHtmlTemplate = '<div class="{{noOfColumn}} vm-ecom-product">' + '<a href="{{productPageName}}">' + '<img className="img-responsive" src="{{productImageUrl}}" alt=""></a>' + '<div class="info">' + '    <div class="product-info ">' + '      <div class="title">{{productName}}</div> <span class="vm-product-price-section" style="display:{{showPrices}};">' + '      {{currencySymbol}}<span class="price vm-format-number">{{productPrice}}</span><span> {{currencyCode}}{{weightUnit}}</span>' + '      <span class="strikePrice hide">(<strike> {{currencySymbol}}<span class="vm-format-number">{{strikePrice}}</span><span> {{currencyCode}}{{weightUnit}}</span></strike> ) </span>' + '    </span></div>' + '    <div class="plus-minus viamagus-cart-qty-container" style="display:{{showPrices}};">' + '      <a class="btn viamagus-cart-minus" target="" href="#"> <i class="fa fa-minus"></i> </a>' + '      <input data-min-qty="{{minQty}}" data-max-qty="{{maxQty}}" data-inv-qty="{{invQty}}" data-track-inventory="{{trackInventory}}" name="quantity" id="viamagus-cart-qty-{{productId}}" class="viamagus-cart-qty"  type="number" min="1" max="50" value="{{minQty}}" size="3">' + '      <a class="btn viamagus-cart-plus" target="" href="#"> <i class="fa fa-plus"></i> </a>' + '     <div style="float:right;">' + '    <div class="button-align" > <a data-product-id="{{productId}}" class="viamagus-cart-button btn viamagus-button-{{buttonType}}" target="" href="#">{{buttonLabel}}</a>  </div>' + '   </div><div id="cart-success-{{productId}}" style="text-align:center;color:green;display:none;"><span style="float:left;">&#x2714; Added to Cart.</span> <a style="float:right;" class="btn viamagus-button-default" href="cart.html">Checkout</a> </div><div class="error-message-{{productId}}" style="color:red"></div></div></div ></div>',
-    this.cartButtonHtml = '<a href="cart.html" class="viamagus-cart-icon icon-cart cart-button"><div class="viamagus-cart-count">0</div> <span>Cart</span></a>';
+    this.cartCountPlaceHolder = '.wr-cart__count',
+    this.productHtmlTemplate = '<div class="{{noOfColumn}} vm-ecom-product">' + '<a href="{{productPageName}}">' + '<img className="img-responsive" src="{{productImageUrl}}" alt=""></a>' + '<div class="info">' + '    <div class="product-info ">' + '      <div class="title">{{productName}}</div> <span class="vm-product-price-section" style="display:{{showPrices}};">' + '      {{currencySymbol}}<span class="price vm-format-number">{{productPrice}}</span><span> {{currencyCode}}{{weightUnit}}</span>' + '      <span class="strikePrice hide">(<strike> {{currencySymbol}}<span class="vm-format-number">{{strikePrice}}</span><span> {{currencyCode}}{{weightUnit}}</span></strike> ) </span>' + '    </span></div>' + '    <div class="plus-minus wr-cart__qty-container" style="display:{{showPrices}};">' + '      <a class="btn wr-cart__minus" target="" href="#"> <i class="fa fa-minus"></i> </a>' + '      <input data-min-qty="{{minQty}}" data-max-qty="{{maxQty}}" data-inv-qty="{{invQty}}" data-track-inventory="{{trackInventory}}" name="quantity" id="wr-cart__qty-{{productId}}" class="wr-cart__qty"  type="number" min="1" max="50" value="{{minQty}}" size="3">' + '      <a class="btn wr-cart__plus" target="" href="#"> <i class="fa fa-plus"></i> </a>' + '     <div style="float:right;">' + '    <div class="button-align" > <a data-product-id="{{productId}}" class="wr-cart__button btn wr-button-{{buttonType}}" target="" href="#">{{buttonLabel}}</a>  </div>' + '   </div><div id="cart-success-{{productId}}" style="text-align:center;color:green;display:none;"><span style="float:left;">&#x2714; Added to Cart.</span> <a style="float:right;" class="btn wr-button-default" href="cart.html">Checkout</a> </div><div class="error-message-{{productId}}" style="color:red"></div></div></div ></div>',
+    this.cartButtonHtml = '<a href="cart.html" class="wr-cart__icon icon-cart cart-button"><div class="wr-cart__count">0</div> <span>Cart</span></a>';
     this.init = function(isProductPage, container) {
         var that = this;
         if (container) {
@@ -5537,29 +5537,29 @@ function viamagusEcomListing(isProductPage, container) {
     ;
     this.registerEvent = function() {
         var that = this;
-        $('.viamagus-cart-minus').unbind();
-        $('.viamagus-cart-minus').click(function(e) {
+        $('.wr-cart__minus').unbind();
+        $('.wr-cart__minus').click(function(e) {
             e.preventDefault();
-            var qty = $(this).parent().find('.viamagus-cart-qty');
+            var qty = $(this).parent().find('.wr-cart__qty');
             if (parseInt(qty.val()) > 1) {
                 qty.val(Math.abs(parseInt(qty.val()) - 1));
             }
         });
-        $('.viamagus-cart-plus').unbind();
-        $('.viamagus-cart-plus').click(function(e) {
+        $('.wr-cart__plus').unbind();
+        $('.wr-cart__plus').click(function(e) {
             e.preventDefault();
-            var qty = $(this).parent().find('.viamagus-cart-qty');
+            var qty = $(this).parent().find('.wr-cart__qty');
             qty.val(Math.abs(parseInt(qty.val()) + 1));
         });
-        $('.viamagus-cart-button').unbind();
-        $('.viamagus-cart-button').click(function(e) {
+        $('.wr-cart__button').unbind();
+        $('.wr-cart__button').click(function(e) {
             e.preventDefault();
             var productId = $(this).attr("data-product-id");
-            var productQty = $('#viamagus-cart-qty-' + productId).val();
-            var minQty = $('#viamagus-cart-qty-' + productId).attr("data-min-Qty");
-            var maxQty = $('#viamagus-cart-qty-' + productId).attr("data-max-Qty");
-            var invQty = $('#viamagus-cart-qty-' + productId).attr("data-inv-Qty");
-            var trackInventory = $('#viamagus-cart-qty-' + productId).attr("data-track-inventory");
+            var productQty = $('#wr-cart__qty-' + productId).val();
+            var minQty = $('#wr-cart__qty-' + productId).attr("data-min-Qty");
+            var maxQty = $('#wr-cart__qty-' + productId).attr("data-max-Qty");
+            var invQty = $('#wr-cart__qty-' + productId).attr("data-inv-Qty");
+            var trackInventory = $('#wr-cart__qty-' + productId).attr("data-track-inventory");
             if (minQty != "" && maxQty != "") {
                 $('.error-message-' + productId).html("");
                 if (productQty < parseInt(minQty)) {
@@ -5578,7 +5578,7 @@ function viamagusEcomListing(isProductPage, container) {
                 } else {
                     $('#cart-success-' + productId).html("");
                     $('.error-message-' + productId).html("Available quantity for purchase " + invQty);
-                    $('#viamagus-cart-qty-' + productId).val(invQty);
+                    $('#wr-cart__qty-' + productId).val(invQty);
                     return;
                 }
             } else {
@@ -5588,11 +5588,11 @@ function viamagusEcomListing(isProductPage, container) {
     }
     ;
     this.checkInventoryQty = function() {
-        var productId = $('.viamagus-cart-button').attr("data-product-id");
-        var invQty = $('#viamagus-cart-qty-' + productId).attr("data-inv-Qty");
-        var trackInventory = $('#viamagus-cart-qty-' + productId).attr("data-track-inventory");
+        var productId = $('.wr-cart__button').attr("data-product-id");
+        var invQty = $('#wr-cart__qty-' + productId).attr("data-inv-Qty");
+        var trackInventory = $('#wr-cart__qty-' + productId).attr("data-track-inventory");
         if (invQty != null && invQty == 0 && trackInventory == 'Y') {
-            $('.viamagus-cart-button').html('SOLD OUT');
+            $('.wr-cart__button').html('SOLD OUT');
         }
     }
     ;
@@ -5695,7 +5695,7 @@ function viamagusEcomListing(isProductPage, container) {
         }).done(function(data) {
             if (data.result != "" && data.result != null) {
                 $.each(data.result, function(k, v) {
-                    $('#viamagus-cart-qty-' + k).val(v);
+                    $('#wr-cart__qty-' + k).val(v);
                     $('#cart-success-' + k).show();
                 });
             }
@@ -5783,8 +5783,8 @@ function viamagusEcomListing(isProductPage, container) {
 }
 Viamagus_Cart_Manager = {
     contextPath: '',
-    container: '#viamagus-shopping-cart-table-content',
-    cartCountPlaceHolder: '.viamagus-cart-count',
+    container: '#wr-shopping-cart__table',
+    cartCountPlaceHolder: '.wr-cart__count',
     isValidDiscount: false,
     cartCurrency: 'INR',
     signUpHtml: '<div tabindex="-1" class="modal show" id="signUpModal" aria-hidden="true"  style="width:400px;left:60%;top:10%;border-radius:0">' + '<div class="modal-header">' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + '      <h2 class="text-center"  style="font-weight:300"  id="signUpHeading">Sign In</h2></div>' + '    <form id="loginForm" style="display: block;margin:0">' + '     <div class="modal-body">' + '        <div class="control-group">' + '              <label class="control-label" for="email">Email</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="userName" name="userName" required type="email" placeholder="abc@abc.com">' + '            </div>' + '        </div>' + '        <div class="control-group">' + '              <label class="control-label" for="password">Password</label>' + '            <div class="controls">' + '                    <input class="input-block-level form-control" id="password" required type="password" placeholder="Password">' + '            </div><br>' + '            <a id="forgot-password" href="" class="forgot-password">' + '            Forgot Password ?' + '        </a>' + '</div>' + '  </div> <div class="modal-footer">' + '    <button type="button" class="btn btn-medium btn-warning vm-ecom-guest-checkout pull-left hide">Guest Checkout</button>' + '    <button type="button" class="btn btn-medium btn-info vm-ecom-goto-register">New user?</button>' + '    <button type="submit" class="btn btn-medium btn-primary vm-ecom-signin">Sign In</button>' + '   </div> </form>' + '    <form id="registerForm" class="hide" style="margin:0">' + '     <div class="modal-body">' + '        <div class="control-group">' + '              <label class="control-label" for="email">Email</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="registerUserName" name="registerUserName" required type="email" placeholder="abc@abc.com">' + '            </div>' + '        </div>' + '        <div class="control-group">' + '              <label class="control-label" for="password">Password</label>' + '            <div class="controls">' + '                    <input class="input-block-level form-control" id="registerUserPassword" required type="password" placeholder="Password">' + '            </div> </div>' + '        <div class="control-group">' + '              <label class="control-label" for="confirmPassword">Confirm Password</label>' + '            <div class="controls">' + '                    <input class="input-block-level form-control" id="registerUserConfirmPassword" required type="password" placeholder="Confirm Password">' + '            </div> </div>' + '  </div> <div class="modal-footer">' + '    <button type="button" class="btn btn-medium btn-warning vm-ecom-guest-checkout pull-left hide">Guest Checkout</button>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-goto-signin ">Existing User?</button>' + '    <button type="submit" class="btn btn-medium btn-info vm-ecom-register">Sign Up</button></div>' + '    </form>' + '    <form id="sendOTPForm" class="hide" style="margin:0">' + '     <div class="modal-body">' + '        <div class="control-group">' + '              <label class="control-label" for="email">Email</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="sendOTPUserName" name="sendOTPUserName" required type="email" placeholder="abc@abc.com" >' + '            </div>' + '            <p id="emailIdErrorMessage"style="color:red;display:none;" >This Email Id is not Registered with us. Please Signup.</p>' + '        </div>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-send-otp pull-left" >Send OTP</button>' + '  </div> <div class="modal-footer">' + '    <button type="button" class="btn btn-medium btn-warning vm-ecom-guest-checkout pull-left hide">Guest Checkout</button>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-goto-signin ">Existing User?</button>' + '    <button type="button" class="btn btn-medium btn-info vm-ecom-goto-register">New user?</button>' + '     </form></div>' + '<form id="compareOTPForm" class="hide" style="margin:0">' + '     <div class="modal-body">' + '        <div class="control-group">' + '              <label class="control-label" for="email">OTP Received</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="receivedOTP" name="receivedOTP" required type="text" placeholder="Enter the OTP you received">' + '            </div>' + '            <p id="warningMessage" >Please enter the OTP you have received through mail. This OTP valid for next 10 minutes.</p>' + '            <p id="otpErrorMessage" style="color:red;display:none;">OTP is not Matching or Expired.</p>' + '        </div>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-submit-otp pull-left" disabled>Submit OTP</button><br><br>' + '            <a id="forgot-password" href="" class="forgot-password">' + '            Resend OTP ?' + '        </a>' + '  </div> <div class="modal-footer">' + '    <button type="button" class="btn btn-medium btn-warning vm-ecom-guest-checkout pull-left hide">Guest Checkout</button>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-goto-signin ">Existing User?</button>' + '    <button type="button" class="btn btn-medium btn-info vm-ecom-goto-register">New user?</button>' + '     </form></div>' + '<form id="passwordResetForm" class="hide" style="margin:0">' + '     <div class="modal-body">' + '        <div class="control-group">' + '              <label class="control-label" for="email">Enter new Password</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="newPassword" name="newPassword" required type="password" placeholder="Enter the password">' + '        </div>' + '        </div>' + '        <div class="control-group">' + '              <label class="control-label" for="email">Confirm Password</label>' + '              <div class="controls">' + '                <input class="input-block-level form-control" id="confirmPassword" name="confirmPassword" required type="password" placeholder="Re-Enter the password">' + '        </div>' + '              <p id="passwordErrorMessage" style="color:red;display:none;">Please enter valid OTP</p>' + '        </div>' + '    <button type="submit" class="btn btn-medium btn-primary vm-ecom-submit-password pull-left">Submit</button>' + '  </div> <div class="modal-footer">' + '    <button type="button" class="btn btn-medium btn-warning vm-ecom-guest-checkout pull-left hide">Guest Checkout</button>' + '    <button type="button" class="btn btn-medium btn-primary vm-ecom-goto-signin ">Existing User?</button>' + '    <button type="button" class="btn btn-medium btn-info vm-ecom-goto-register">New user?</button>' + '     </form></div>' + '</div>',
@@ -5795,17 +5795,17 @@ Viamagus_Cart_Manager = {
     registerDiscountEvent: function() {
         var that = this;
         if ($('#discountCode').length) {
-            $('.viamagus-apply-ecommerce-discount').unbind();
-            $('.viamagus-apply-ecommerce-discount').click(function(e) {
+            $('.wr-discount__apply').unbind();
+            $('.wr-discount__apply').click(function(e) {
                 e.preventDefault();
                 that.calculateCartDiscountAmount();
             });
-            $('.viamagus-remove-ecommerce-discount').unbind();
-            $('.viamagus-remove-ecommerce-discount').click(function(e) {
+            $('.wr-discount__remove').unbind();
+            $('.wr-discount__remove').click(function(e) {
                 e.preventDefault();
                 $('#discountCode').val('');
-                $('.viamagus-remove-ecommerce-discount').hide();
-                $('.viamagus-apply-ecommerce-discount').show();
+                $('.wr-discount__remove').hide();
+                $('.wr-discount__apply').show();
                 that.calculateCartDiscountAmount();
             });
         }
@@ -5854,28 +5854,28 @@ Viamagus_Cart_Manager = {
                         totalAmount = data.result[i].totalAmountInTransactionCurrency;
                         $('#shoppingCartTotal').attr("data-total-amount-in-txn-cur", data.result[i].totalAmountInTransactionCurrency);
                     }
-                    var cartItemHtml = '<tr class="viamagus-cart-item-row" data-product-name="' + data.result[i].productName + '" data-product-id="' + data.result[i].productId + '" data-product-price="' + productPrice + '"';
+                    var cartItemHtml = '<tr class="wr-cart__item-row" data-product-name="' + data.result[i].productName + '" data-product-id="' + data.result[i].productId + '" data-product-price="' + productPrice + '"';
                     cartItemHtml = cartItemHtml + 'data-discount-price="" data-product-row-total-amount="">';
                     cartItemHtml = cartItemHtml + '<td data-title="Product Name">' + data.result[i].productName + '</td>';
                     if (data.result[i].productImageUrl != '') {
                         var images = JSON.parse(data.result[i].productImageUrl).images;
                         for (var j = 0; j < images.length; j++) {
                             if (images[j].hasOwnProperty('primary')) {
-                                cartItemHtml = cartItemHtml + '<td data-tile="Image"><a class="viamagus-image-lightbox" href="' + images[j].primary + '"><img class="viamagus-product-image-url" style="width:50px;height:auto;" src="' + images[j].primary + '"></a></td>';
+                                cartItemHtml = cartItemHtml + '<td data-tile="Image"><a class="wr-lightbox--image" href="' + images[j].primary + '"><img class="wr-product__image-url" style="width:50px;height:auto;" src="' + images[j].primary + '"></a></td>';
                             }
                         }
                     } else {
-                        cartItemHtml = cartItemHtml + '<td data-tile="Image"><a class="viamagus-image-lightbox" href=""><img style="width:50px;height:auto;" src=""></a></td>';
+                        cartItemHtml = cartItemHtml + '<td data-tile="Image"><a class="wr-lightbox--image" href=""><img style="width:50px;height:auto;" src=""></a></td>';
                     }
-                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="viamagus-product-price viamagus-format-number">';
+                    cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="wr-product__price wr-format--number">';
                     cartItemHtml = cartItemHtml + productPrice + '</span> ' + currencyCode + '' + ((data.result[i].weightUnit != null && data.result[i].weightUnit != "") ? "/" + data.result[i].weightUnit : "") + '</td>';
                     cartItemHtml = cartItemHtml + '<td class="numeric" data-title="Quantity">';
                     var minQty = data.result[i].hasOwnProperty('minimumOrderQty') ? data.result[i].minimumOrderQty : 1;
                     var maxQty = data.result[i].hasOwnProperty('maximumOrderQty') ? data.result[i].maximumOrderQty : 100;
-                    cartItemHtml = cartItemHtml + '<input data-min-qty="' + minQty + '" data-max-qty="' + maxQty + '" style="width:35px;" data-product-id="' + data.result[i].productId + '" class="viamagus-product-qty" type="number" ';
+                    cartItemHtml = cartItemHtml + '<input data-min-qty="' + minQty + '" data-max-qty="' + maxQty + '" style="width:35px;" data-product-id="' + data.result[i].productId + '" class="wr-product__qty" type="number" ';
                     cartItemHtml = cartItemHtml + 'name="productQty" data-product-name-' + data.result[i].productId + '=' + data.result[i].productName + ' data-track-inv-' + data.result[i].productId + '=' + data.result[i].trackInventory + ' data-inv-qty-' + data.result[i].productId + '=' + data.result[i].inventoryQty + ' id=productQty value="' + data.result[i].productQty + '"></td>';
-                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" data-title="Sub Total" ><b>' + currencySymbol + '<span class="viamagus-product-subtotal row-subtotal viamagus-format-number">' + productSubTotal + '</span> ' + currencyCode + '</b></td>';
-                    cartItemHtml = cartItemHtml + '<td data-title="Remove"><button class="btn btn-warning viamagus-cart-item-remove">X</button></td></tr>';
+                    cartItemHtml = cartItemHtml + '<td class="numeric sub-total" data-title="Sub Total" ><b>' + currencySymbol + '<span class="wr-product__subtotal row-subtotal wr-format--number">' + productSubTotal + '</span> ' + currencyCode + '</b></td>';
+                    cartItemHtml = cartItemHtml + '<td data-title="Remove"><button class="btn btn-warning wr-cart__item-remove">X</button></td></tr>';
                     $(that.container).append(cartItemHtml);
                 }
                 cartItemHtml = ' <span style="color:red" id="errorMsg"></span>';
@@ -5885,7 +5885,7 @@ Viamagus_Cart_Manager = {
                     $('.vm-cart-currency-code').html(currencyCode);
                     $('.vm-cart-currency-symbol').html(currencySymbol);
                 }
-                $('.viamagus-image-lightbox').magnificPopup({
+                $('.wr-lightbox--image').magnificPopup({
                     type: 'image'
                 });
                 that.calculateCartAmount();
@@ -5895,7 +5895,7 @@ Viamagus_Cart_Manager = {
                 that.calculateCartDiscountAmount();
             } else {
                 $(that.container).append('<tr><td colspan="6" style="text-align:center;"> Cart is empty. </td></tr>');
-                $('.viamagus-place-order').attr("disabled", "disabled");
+                $('.wr-checkout__place-order').attr("disabled", "disabled");
             }
         });
     },
@@ -5917,15 +5917,15 @@ Viamagus_Cart_Manager = {
     },
     calculateCartAmount: function() {
         var totalAmount = 0;
-        $('.viamagus-cart-item-row').each(function(index, item) {
+        $('.wr-cart__item-row').each(function(index, item) {
             var price = parseFloat($(item).attr("data-product-price"));
             var qty = $(item).find("#productQty").val();
             var productSubtotal = parseFloat(qty * price);
-            $(item).find('.viamagus-product-subtotal').html(productSubtotal);
+            $(item).find('.wr-product__subtotal').html(productSubtotal);
             totalAmount = totalAmount + productSubtotal;
         });
         $('#shoppingCartTotal').html(totalAmount);
-        $('.viamagus-format-number').number(true, 2);
+        $('.wr-format--number').number(true, 2);
     },
     calculateCartDiscountAmount: function() {
         var that = this;
@@ -5948,14 +5948,14 @@ Viamagus_Cart_Manager = {
                         var totalAmountAfterDiscount = data.result.totalAmountAfterDiscount;
                         $('.discountAmount').attr("data-discount-amount", discountAmount);
                         $('.totalAfterDiscountAmount').attr("data-total-amount", totalAmountAfterDiscount);
-                        $('.viamagus-discount-error-message').css({
+                        $('.wr-discount__error').css({
                             color: 'green'
                         });
                         if (data.result.discountErrorMessage != null && data.result.discountErrorMessage != "") {} else {
-                            $('.viamagus-discount-error-message').html('Valid Code.');
+                            $('.wr-discount__error').html('Valid Code.');
                         }
-                        $('.viamagus-discount-amount').show();
-                        $('.viamagus-total-after-discount-section').show();
+                        $('.wr-discount__amount').show();
+                        $('.wr-discount__total-after').show();
                         if (data.result.transactionCurrency != null && data.result.transactionCurrency != "") {
                             $('.discountAmount').attr("data-discount-amount-in-txn-cur", data.result.discountAmountInTransactionCurrency);
                             $('.totalAfterDiscountAmount').attr("data-total-amount-in-txn-cur", data.result.totalAmountAfterDiscountInTransactionCurrency);
@@ -5964,35 +5964,35 @@ Viamagus_Cart_Manager = {
                         }
                         $('.discountAmount').html(discountAmount);
                         $('.totalAfterDiscountAmount').html(totalAmountAfterDiscount);
-                        $('.viamagus-format-number').number(true, 2);
-                        $('.viamagus-remove-ecommerce-discount').show();
-                        $('.viamagus-apply-ecommerce-discount').hide();
+                        $('.wr-format--number').number(true, 2);
+                        $('.wr-discount__remove').show();
+                        $('.wr-discount__apply').hide();
                         $('#discountCode').attr("readonly", "readonly");
                     } else {
                         that.isValidDiscount = false;
-                        $('.viamagus-discount-error-message').css({
+                        $('.wr-discount__error').css({
                             color: 'red'
                         });
                         if (data.result.discountErrorMessage != null && data.result.discountErrorMessage != "") {
-                            $('.viamagus-discount-error-message').html(data.result.discountErrorMessage);
+                            $('.wr-discount__error').html(data.result.discountErrorMessage);
                         }
-                        $('.viamagus-discount-error-message').html(discountCode + " is an invalid code.");
+                        $('.wr-discount__error').html(discountCode + " is an invalid code.");
                         $('#discountCode').val('');
-                        $('.viamagus-discount-amount').hide();
-                        $('.viamagus-total-after-discount-section').hide();
-                        $('.viamagus-remove-ecommerce-discount').hide();
-                        $('.viamagus-apply-ecommerce-discount').show();
+                        $('.wr-discount__amount').hide();
+                        $('.wr-discount__total-after').hide();
+                        $('.wr-discount__remove').hide();
+                        $('.wr-discount__apply').show();
                         $('.discountAmount').html('');
                         $('.totalAfterDiscountAmount').html('');
                     }
                 }
             });
         } else {
-            $('.viamagus-discount-error-message').html('');
-            $('.viamagus-discount-amount').hide();
-            $('.viamagus-total-after-discount-section').hide();
-            $('.viamagus-remove-ecommerce-discount').hide();
-            $('.viamagus-apply-ecommerce-discount').show();
+            $('.wr-discount__error').html('');
+            $('.wr-discount__amount').hide();
+            $('.wr-discount__total-after').hide();
+            $('.wr-discount__remove').hide();
+            $('.wr-discount__apply').show();
             $('.discountAmount').html('');
             $('.totalAfterDiscountAmount').html('');
             $('#discountCode').removeAttr("readonly");
@@ -6001,8 +6001,8 @@ Viamagus_Cart_Manager = {
     },
     registerCartQtyEvent: function() {
         var that = this;
-        $('.viamagus-product-qty').unbind();
-        $('.viamagus-product-qty').change(function(e) {
+        $('.wr-product__qty').unbind();
+        $('.wr-product__qty').change(function(e) {
             $(this).val(Math.abs($(this).val()));
             var productId = $(this).attr("data-product-id");
             var productName = $(this).attr("data-product-name-" + productId);
@@ -6068,8 +6068,8 @@ Viamagus_Cart_Manager = {
     },
     registerCartItemRemoveEvent: function() {
         var that = this;
-        $('.viamagus-cart-item-remove').unbind();
-        $('.viamagus-cart-item-remove').click(function(event) {
+        $('.wr-cart__item-remove').unbind();
+        $('.wr-cart__item-remove').click(function(event) {
             var productId = $(this).closest('tr').attr("data-product-id");
             $.ajax({
                 url: that.contextPath + '/REST/ecommerce/deleteCartItem/',
@@ -6090,8 +6090,8 @@ Viamagus_Cart_Manager = {
     },
     registerPlaceOrder: function() {
         var that = this;
-        $('.viamagus-place-order').unbind();
-        $('.viamagus-place-order').click(function(event) {
+        $('.wr-checkout__place-order').unbind();
+        $('.wr-checkout__place-order').click(function(event) {
             that.checkLoginStatus(true, true, function() {
                 that.placeOrder()
             });
@@ -6100,13 +6100,13 @@ Viamagus_Cart_Manager = {
     placeOrder: function() {
         var that = this;
         var orderItemJson = [];
-        $('.viamagus-cart-item-row').each(function(index, item) {
+        $('.wr-cart__item-row').each(function(index, item) {
             var price = parseFloat($(item).attr("data-product-price"));
             var productName = $(item).attr("data-product-name");
             var qty = $(item).find("#productQty").val();
             var productSubtotal = parseFloat(qty * price);
             var productId = $(item).attr("data-product-id");
-            var productImageUrl = $(item).find(".viamagus-product-image-url").attr('src');
+            var productImageUrl = $(item).find(".wr-product__image-url").attr('src');
             orderItemJson.push({
                 "orderItemNo": index + 1,
                 "orderImageUrl": productImageUrl,
@@ -6131,7 +6131,7 @@ Viamagus_Cart_Manager = {
             discountAmount = $('.discountAmount').attr("data-discount-amount");
             discountAmountInTransactionCur = $('.discountAmount').attr("data-discount-amount-in-txn-cur");
         }
-        $('.viamagus-place-order').attr("disabled", "disabled");
+        $('.wr-checkout__place-order').attr("disabled", "disabled");
         var reqOptions = {
             url: that.contextPath + '/REST/ecommerce/placeOrder',
             data: {
@@ -6146,7 +6146,7 @@ Viamagus_Cart_Manager = {
                 discountAmountInTxnCurrency: discountAmountInTransactionCur
             },
             callback: function(data, orderId) {
-                $('.viamagus-place-order').removeAttr("disabled");
+                $('.wr-checkout__place-order').removeAttr("disabled");
                 var url = that.contextPath + "/paymentCapture.html";
                 if (totalAmountInTransactionCur != "" && totalAmountInTransactionCur != null) {
                     totalAmount = totalAmountInTransactionCur;
@@ -6168,7 +6168,7 @@ Viamagus_Cart_Manager = {
                 });
             },
             errorCallBack: function(data) {
-                $('.viamagus-place-order').removeAttr("disabled");
+                $('.wr-checkout__place-order').removeAttr("disabled");
             },
             successMsg: '',
             async: false,
@@ -6458,14 +6458,14 @@ Viamagus_Cart_Manager = {
             dataType: 'jsonp',
             jsonp: 'jsonCallback'
         }).done(function(data) {
-            $('.viamagus-ecom-sign-in-link-section').show();
-            $('.viamagus-ecom-sign-in-success').hide();
+            $('.wr-ecom__sign-in-section').show();
+            $('.wr-ecom__sign-in-success').hide();
             window.location.href = "home.html";
         });
     },
     loadMyOrders: function() {
         var that = this;
-        if ($('.viamagus-ecom-my-orders').length) {
+        if ($('.wr-ecom__my-orders').length) {
             $.ajax({
                 url: that.contextPath + '/REST/ecommerce/loadMyOrders/',
                 type: 'POST',
@@ -6508,7 +6508,7 @@ Viamagus_Cart_Manager = {
                         orderHtml = orderHtml + '<br><h4 style="text-align:center;">Order Items</h4><hr><table class="table table-striped table-condensed cf"> '
                         orderHtml = orderHtml + '<thead class="cf"> <tr style="border-bottom: 2px solid black;">  ';
                         orderHtml = orderHtml + '<th>Item Name</th><th>Image</th><th class="numeric">Price</th>';
-                        orderHtml = orderHtml + '<th class="numeric">Quantity</th><th class="numeric">Sub Total</th></tr> </thead> <tbody id="viamagus-recent-order-table-content">';
+                        orderHtml = orderHtml + '<th class="numeric">Quantity</th><th class="numeric">Sub Total</th></tr> </thead> <tbody id="wr-checkout__recent-orders">';
                         for (var j = 0; j < data.result.length; j++) {
                             if (order.orderId == data.result[j].orderId) {
                                 var productPrice = data.result[j].productPrice;
@@ -6517,25 +6517,25 @@ Viamagus_Cart_Manager = {
                                     productPrice = data.result[j].priceInTransactCurrency;
                                     productAmount = data.result[j].productAmountInTransactionCurrency;
                                 }
-                                orderHtml = orderHtml + '<tr class="viamagus-cart-item-row" >';
+                                orderHtml = orderHtml + '<tr class="wr-cart__item-row" >';
                                 orderHtml = orderHtml + '<td data-title="Product Name">' + data.result[j].productName + '</td>';
-                                orderHtml = orderHtml + '<td data-title="Image"><a class="viamagus-image-lightbox" href="#"><img class="viamagus-product-image-url" style="width:50px;height:auto;" src="' + data.result[j].productImageUrl + '"></a></td>';
-                                orderHtml = orderHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="viamagus-product-price viamagus-format-number">';
+                                orderHtml = orderHtml + '<td data-title="Image"><a class="wr-lightbox--image" href="#"><img class="wr-product__image-url" style="width:50px;height:auto;" src="' + data.result[j].productImageUrl + '"></a></td>';
+                                orderHtml = orderHtml + '<td class="numeric" data-title="Price">' + currencySymbol + '<span class="wr-product__price wr-format--number">';
                                 orderHtml = orderHtml + ' ' + productPrice + '</span> ' + currencyCode + '</td>';
                                 orderHtml = orderHtml + '<td class="numeric" data-title="Quantity">' + data.result[j].productQty + '</td>';
-                                orderHtml = orderHtml + '<td class="numeric sub-total" data-title="Sub Total"><b>' + currencySymbol + '<span class="viamagus-product-subtotal row-subtotal viamagus-format-number">' + productAmount + '</span> ' + currencyCode + '</b></td>';
+                                orderHtml = orderHtml + '<td class="numeric sub-total" data-title="Sub Total"><b>' + currencySymbol + '<span class="wr-product__subtotal row-subtotal wr-format--number">' + productAmount + '</span> ' + currencyCode + '</b></td>';
                                 orderHtml = orderHtml + '</tr>';
                             }
                         }
                         orderHtml = orderHtml + '</tbody></table><table style="width:100%;text-align:right;"> <tbody><tr> ';
                         if (discountAmount != null && discountAmount != "") {
-                            orderHtml = orderHtml + '<td colspan="5" class="numeric sub-total"><b>Discount Amount :' + currencySymbol + ' <span class="viamagus-format-number" id="discountTotal">' + discountAmount + '</span>' + currencyCode + '</b></td> ';
+                            orderHtml = orderHtml + '<td colspan="5" class="numeric sub-total"><b>Discount Amount :' + currencySymbol + ' <span class="wr-format--number" id="discountTotal">' + discountAmount + '</span>' + currencyCode + '</b></td> ';
                         }
-                        orderHtml = orderHtml + '<td colspan="5" class="numeric sub-total"><b>Total Amount :' + currencySymbol + ' <span class="viamagus-format-number" id="recentOrderTotal">' + totalAmount + '</span> ' + currencyCode + '</b></td> ';
+                        orderHtml = orderHtml + '<td colspan="5" class="numeric sub-total"><b>Total Amount :' + currencySymbol + ' <span class="wr-format--number" id="recentOrderTotal">' + totalAmount + '</span> ' + currencyCode + '</b></td> ';
                         orderHtml = orderHtml + '</tr></tbody></table><br><br><br><hr>';
                         $('.vm-my-order-container').append(orderHtml);
                     }
-                    $('.viamagus-format-number').number(true, 2);
+                    $('.wr-format--number').number(true, 2);
                 }
             });
         }
@@ -6800,7 +6800,7 @@ Viamagus_Currency_Manager = {
         }
     },
     reloadCartItems: function() {
-        if ($(".viamagus-shopping-cart").length > 0) {
+        if ($(".wr-shopping-cart").length > 0) {
             debugger ;var callback = function() {
                 Viamagus_Cart_Manager.registerEvent();
             }
@@ -6826,8 +6826,8 @@ Viamagus_Currency_Manager = {
     },
     refreshFormProducts: function(txnCurrency, conversionRate) {
         var that = this;
-        if ($('.viamagus-custom-form').length) {
-            $('.viamagus-custom-form').each(function(index, e) {
+        if ($('.wr-form--custom').length) {
+            $('.wr-form--custom').each(function(index, e) {
                 var customformId = $(e).attr('id');
                 Viamagus_Form_Loader._calculateProductAmount(customformId, that.baseCurrency, txnCurrency, conversionRate);
             });
@@ -6856,7 +6856,7 @@ Viamagus_Currency_Manager = {
         }
     },
     disableCurrencyDropDownOnPaymentPage: function() {
-        if ($('.viamagus-payment-form').length || $('.viamagus-payment-success').length || $('.viamagus-payment-failure').length) {
+        if ($('.wr-payment__form').length || $('.wr-payment--success').length || $('.wr-payment--failure').length) {
             $('.vm-currency-container').hide();
         }
     }
