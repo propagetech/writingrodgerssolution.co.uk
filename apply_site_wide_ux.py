@@ -17,11 +17,7 @@ FLOATING_WA = f'''  <a class="live-chat-fixed no-loader-all" href="{WA_UK_SHORT}
     <img src="imgs/image-20.webp" alt="Chat on WhatsApp" style="border-radius: 50%; width: 50px; height: 50px" />
   </a>'''
 
-MOBILE_CTA = '''  <div class="wr-mobile-cta-bar" aria-hidden="false">
-    <a class="wr-mcta-wa" href="https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20My%20deadline%20is%3A%20" target="_blank" rel="noopener">WhatsApp</a>
-    <a class="wr-mcta-call" href="tel:+447452010395">Call UK</a>
-    <a class="wr-mcta-email" href="mailto:writingrodgerssolutionuk@gmail.com?subject=Assignment%20help%20request&amp;body=Hi%20Writing%20Rodgers%2C%0A%0ASubject%2Fmodule%3A%0ADeadline%3A%0A">Email</a>
-  </div>'''
+MOBILE_CTA = (PARTIALS / "wr-mobile-cta-bar.html").read_text(encoding="utf-8").rstrip("\n")
 
 WR_CSS = '<link href="css/wr-home.css" rel="stylesheet" />'
 

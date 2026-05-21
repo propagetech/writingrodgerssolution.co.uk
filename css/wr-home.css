@@ -1382,63 +1382,121 @@
 
   .wr-mobile-cta-bar {
     display: flex;
+    align-items: stretch;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 1999;
-    padding: 10px 12px;
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
-    background: #010038;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
     gap: 8px;
+    padding: 8px 12px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    background: rgba(1, 0, 56, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.28);
   }
 
   .wr-mobile-cta-bar a {
-    flex: 1;
-    text-align: center;
-    padding: 12px 10px;
     font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 8px;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .wr-mobile-cta-bar .wr-mcta-wa {
-    background: #25d366;
+  .wr-mcta--primary {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #25d366 0%, #1ebe57 100%);
     color: #fff !important;
+    box-shadow: 0 2px 12px rgba(37, 211, 102, 0.35);
   }
 
-  .wr-mobile-cta-bar .wr-mcta-call,
-  .wr-mobile-cta-bar .wr-mcta-email {
-    background: rgba(255, 255, 255, 0.12);
+  .wr-mcta--primary:active {
+    transform: scale(0.98);
+  }
+
+  .wr-mcta--primary .wr-mcta__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .wr-mcta--primary .wr-mcta__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    line-height: 1.2;
+  }
+
+  .wr-mcta--primary .wr-mcta__title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .wr-mcta--primary .wr-mcta__sub {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.92;
+  }
+
+  .wr-mcta-quick {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  .wr-mcta--quick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 52px;
+    padding: 8px 4px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
     color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background 0.15s ease;
   }
 
-  .wr-mobile-cta-bar .wr-mcta-email {
-    background: #e84b53;
-    border-color: #e84b53;
+  .wr-mcta--quick:active {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .wr-mcta--quick .wr-mcta__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.95;
+  }
+
+  .wr-mcta--quick .wr-mcta__title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   body {
-    padding-bottom: 58px;
+    padding-bottom: 72px;
   }
 
   /* Avoid duplicate WhatsApp affordances with the sticky bar */
   a.live-chat-fixed {
     display: none !important;
-  }
-
-  .wr-mobile-cta-bar {
-    padding: 8px 10px;
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
-    gap: 6px;
-  }
-
-  .wr-mobile-cta-bar a {
-    padding: 11px 8px;
-    font-size: 13px;
   }
 }
