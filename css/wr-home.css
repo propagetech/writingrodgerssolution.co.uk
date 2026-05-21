@@ -1,5 +1,5 @@
 /* Writing Rodgers — homepage conversion layer */
-@import url('/css/wr-m3-tokens.css');
+@import url('wr-m3-tokens.css');
 
 .wr-nav-link {
   color: rgba(231, 226, 226, 1) !important;
