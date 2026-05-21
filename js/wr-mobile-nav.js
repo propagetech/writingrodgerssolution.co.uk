@@ -1,13 +1,44 @@
 /**
- * M3 navigation drawer — scrim, focus trap helpers, drawer chrome.
+ * M3 mobile menu — top app bar + panel expands below; desktop horizontal nav.
  * Requires jQuery + Bootstrap 2 collapse (main-7.js).
  */
 (function ($) {
   'use strict';
 
+  function isMobileNav() {
+    return window.matchMedia('(max-width: 979px)').matches;
+  }
+
+  function getDrawerHomeParent() {
+    return $('#menu .navbar-inner');
+  }
+
+  function placeDrawer($collapse) {
+    if (!$collapse.length) {
+      return;
+    }
+
+    var $home = getDrawerHomeParent();
+    if (!$home.length) {
+      return;
+    }
+
+    var $row = $home.find('.wr-m3-app-bar__row').first();
+    if ($row.length) {
+      if ($collapse.prev()[0] !== $row[0]) {
+        $collapse.insertAfter($row);
+      }
+      return;
+    }
+
+    if ($collapse.parent()[0] !== $home[0]) {
+      $collapse.appendTo($home);
+    }
+  }
+
   function initWrMobileNav() {
     var $menu = $('#menu');
-    var $collapse = $menu.find('.nav-collapse');
+    var $collapse = $menu.find('.nav-collapse').add('body > .nav-collapse').first();
     var $toggle = $menu.find('.btn-navbar');
 
     if (!$menu.length || !$collapse.length || !$toggle.length) {
@@ -15,15 +46,18 @@
     }
 
     if ($menu.data('wrM3NavInit')) {
+      placeDrawer($collapse);
       return;
     }
     $menu.data('wrM3NavInit', true);
+
+    placeDrawer($collapse);
 
     $toggle
       .addClass('wr-m3-menu-button')
       .attr({
         'aria-label': 'Open navigation menu',
-        'aria-controls': 'menu-nav',
+        'aria-controls': 'wr-mobile-nav-drawer',
         'aria-expanded': 'false',
       });
 
@@ -52,11 +86,7 @@
       $toggle.attr('aria-expanded', isOpen ? 'true' : 'false');
       $toggle.attr('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
       $('.wr-m3-nav-scrim').attr('aria-hidden', isOpen ? 'false' : 'true');
-      if (isOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
     function closeDrawer() {
@@ -64,16 +94,28 @@
     }
 
     $collapse.on('show', function () {
+      if (isMobileNav()) {
+        $collapse.css('height', 'auto');
+      }
       setOpen(true);
       $collapse.addClass('wr-m3-drawer-open');
     });
 
+    $collapse.on('shown', function () {
+      if (isMobileNav()) {
+        $collapse.css('overflow-y', 'auto');
+      }
+    });
+
     $collapse.on('hidden', function () {
+      if (isMobileNav()) {
+        $collapse.css({ height: '', overflow: '' });
+      }
       setOpen(false);
       $collapse.removeClass('wr-m3-drawer-open');
     });
 
-    $('.wr-m3-nav-scrim, .wr-m3-drawer-close').on('click', function () {
+    $('.wr-m3-nav-scrim').on('click', function () {
       closeDrawer();
     });
 
@@ -100,18 +142,91 @@
             '</svg></span>'
         );
       }
-      $link.find('b.caret').hide();
     });
+
+    bindMobileDropdowns($menu, $collapse);
+    syncNavChrome($menu);
+  }
+
+  function bindMobileDropdowns($menu, $collapse) {
+    $menu.find('.dropdown-toggle').off('click.wrM3Dropdown').on('click.wrM3Dropdown', function (e) {
+      if (!isMobileNav()) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      var $item = $(this).closest('.dropdown');
+      var isOpen = $item.hasClass('open');
+
+      $menu.find('.dropdown.open').removeClass('open');
+      if (!isOpen) {
+        $item.addClass('open');
+      }
+    });
+
+    $collapse.find('.dropdown-menu a').off('click.wrM3Subnav').on('click.wrM3Subnav', function () {
+      if (!isMobileNav()) {
+        return;
+      }
+      $collapse.collapse('hide');
+    });
+  }
+
+  function syncNavChrome($menu) {
+    if (isMobileNav()) {
+      $menu.find('.dropdown-toggle .caret').hide();
+      $menu.find('.wr-m3-expander-icon').show();
+      return;
+    }
+
+    $menu.find('.dropdown-toggle .caret').show();
+    $menu.find('.wr-m3-expander-icon').hide();
+  }
+
+  function syncDesktopNavState() {
+    var $menu = $('#menu');
+    var $collapse = $('#wr-mobile-nav-drawer');
+    if (!$collapse.length) {
+      $collapse = $menu.find('.nav-collapse').add('body > .nav-collapse').first();
+    }
+    if (!$collapse.length) {
+      return;
+    }
+
+    if (!isMobileNav()) {
+      $menu.find('.dropdown.open').removeClass('open');
+      $('body').removeClass('wr-m3-nav-open');
+      document.body.style.overflow = '';
+      $collapse.removeClass('wr-m3-drawer-open collapsing');
+      $collapse.css({ height: '', overflow: '' });
+      if ($collapse.hasClass('collapse') && !$collapse.hasClass('in')) {
+        $collapse.addClass('in');
+      }
+      return;
+    }
+
+    if ($collapse.hasClass('in') && !$('body').hasClass('wr-m3-nav-open')) {
+      $collapse.removeClass('in wr-m3-drawer-open');
+    }
   }
 
   $(function () {
     initWrMobileNav();
-    $(window).on('resize', function () {
-      if (!window.matchMedia('(max-width: 979px)').matches && $('body').hasClass('wr-m3-nav-open')) {
-        $('body').removeClass('wr-m3-nav-open');
-        document.body.style.overflow = '';
-        $('#menu .nav-collapse').removeClass('wr-m3-drawer-open');
+    syncNavChrome($('#menu'));
+    syncDesktopNavState();
+
+    $(window).on('resize.wrM3Nav', function () {
+      var $menu = $('#menu');
+      var $collapse = $('#wr-mobile-nav-drawer');
+      if (!$collapse.length) {
+        $collapse = $('#menu .nav-collapse').add('body > .nav-collapse').first();
       }
+      placeDrawer($collapse);
+      bindMobileDropdowns($menu, $collapse);
+      syncNavChrome($menu);
+      syncDesktopNavState();
     });
   });
 })(window.jQuery);
