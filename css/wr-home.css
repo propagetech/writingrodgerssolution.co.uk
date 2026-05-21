@@ -1212,6 +1212,13 @@
   font-weight: 600;
 }
 
+.wr-contact-legal {
+  margin-top: 1rem;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #4a4a4b;
+}
+
 .wr-hero__actions .wr-btn-call {
   margin-left: 0;
 }
