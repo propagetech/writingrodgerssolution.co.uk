@@ -35,28 +35,46 @@
 /* M3 mobile navigation drawer — https://m3.material.io/components/navigation-drawer */
 @media (max-width: 979px) {
   #menu .viamagus-component-content.navbar {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding: 0 8px !important;
   }
 
+  #menu .navbar-inner {
+    min-height: 0;
+  }
+
+  /* M3 small top app bar: nav icon (start) + logo — drawer is fixed, not in this row */
   #menu .menu-center {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
+    gap: 4px;
     min-height: 64px;
+    height: 64px;
     width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 12px 0 4px !important;
     box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+  }
+
+  #menu .menu-center::before,
+  #menu .menu-center::after {
+    display: none;
   }
 
   #menu .wr-m3-menu-button {
     position: relative;
     order: 1;
+    flex: 0 0 48px;
+    float: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
     width: 48px;
     height: 48px;
-    margin: 8px 4px 8px 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     border-radius: var(--md-sys-shape-corner-full) !important;
@@ -109,20 +127,35 @@
 
   #menu .viamagus-business-logo {
     order: 2;
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
+    float: none !important;
+  }
+
+  #menu .viamagus-business-logo .brand {
+    display: block;
+    float: none !important;
+    margin: 0 !important;
+    padding: 4px 0 !important;
   }
 
   #menu .viamagus-business-logo .brand img {
     max-width: 140px !important;
     width: auto !important;
     height: auto;
+    vertical-align: middle;
   }
 
+  /* Drawer panel is position:fixed — keep wrapper out of app bar height */
   #menu .collapse-center {
-    order: 3;
-    width: 100%;
-    flex: 0 0 100%;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    flex: 0 0 0;
   }
 
   #menu .nav-collapse.collapse {
