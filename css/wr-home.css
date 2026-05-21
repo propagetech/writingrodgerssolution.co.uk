@@ -1,4 +1,5 @@
 /* Writing Rodgers — homepage conversion layer */
+@import url('/css/wr-m3-tokens.css');
 
 .wr-nav-link {
   color: rgba(231, 226, 226, 1) !important;
@@ -29,6 +30,316 @@
 #menu {
   position: relative;
   z-index: 2100;
+}
+
+/* M3 mobile navigation drawer — https://m3.material.io/components/navigation-drawer */
+@media (max-width: 979px) {
+  #menu .viamagus-component-content.navbar {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  #menu .menu-center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 64px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #menu .wr-m3-menu-button {
+    position: relative;
+    order: 1;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin: 8px 4px 8px 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: var(--md-sys-shape-corner-full) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--md-sys-motion-duration-short4)
+      var(--md-sys-motion-easing-standard);
+  }
+
+  #menu .wr-m3-menu-button:hover,
+  #menu .wr-m3-menu-button:focus {
+    background: rgba(255, 255, 255, var(--md-sys-state-hover-opacity)) !important;
+  }
+
+  #menu .wr-m3-menu-button .icon-bar {
+    display: none;
+  }
+
+  #menu .wr-m3-menu-button::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--md-sys-color-on-surface);
+    border-radius: 2px;
+    box-shadow:
+      0 -6px 0 var(--md-sys-color-on-surface),
+      0 6px 0 var(--md-sys-color-on-surface);
+    transition:
+      transform var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+      box-shadow var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+  }
+
+  body.wr-m3-nav-open #menu .wr-m3-menu-button::before {
+    box-shadow: none;
+    transform: rotate(45deg);
+  }
+
+  body.wr-m3-nav-open #menu .wr-m3-menu-button::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: var(--md-sys-color-on-surface);
+    border-radius: 2px;
+    transform: rotate(-45deg);
+  }
+
+  #menu .viamagus-business-logo {
+    order: 2;
+    flex: 1;
+    min-width: 0;
+  }
+
+  #menu .viamagus-business-logo .brand img {
+    max-width: 140px !important;
+    width: auto !important;
+    height: auto;
+  }
+
+  #menu .collapse-center {
+    order: 3;
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  #menu .nav-collapse.collapse {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    z-index: 2200;
+    width: var(--md-sys-drawer-width);
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 0 24px;
+    clear: none;
+    background: var(--md-sys-color-surface-container-high);
+    box-shadow: var(--md-sys-elevation-3);
+    transform: translateX(100%);
+    transition: transform var(--md-sys-motion-duration-medium2)
+      var(--md-sys-motion-easing-standard);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #menu .nav-collapse.collapse.wr-m3-drawer-open,
+  #menu .nav-collapse.collapse.in {
+    height: 100% !important;
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    transform: translateX(0);
+  }
+
+  #menu .nav-collapse.collapse:not(.in):not(.wr-m3-drawer-open) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .wr-m3-nav-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 2150;
+    background: var(--md-sys-color-scrim);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--md-sys-motion-duration-short4)
+      var(--md-sys-motion-easing-standard);
+  }
+
+  body.wr-m3-nav-open .wr-m3-nav-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wr-m3-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 8px 8px 8px 20px;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    background: var(--md-sys-color-surface-container-high);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .wr-m3-drawer-title {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: var(--md-sys-typescale-title-medium-size);
+    line-height: var(--md-sys-typescale-title-medium-line-height);
+    font-weight: var(--md-sys-typescale-title-medium-weight);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .wr-m3-drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: var(--md-sys-shape-corner-full);
+    background: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .wr-m3-drawer-close:active {
+    background: rgba(255, 255, 255, var(--md-sys-state-pressed-opacity));
+  }
+
+  #menu .nav-collapse .nav {
+    float: none;
+    margin: 8px 0 0;
+    padding: 0 12px 16px;
+    list-style: none;
+  }
+
+  #menu .nav-collapse .nav > li {
+    float: none;
+    margin: 0;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  #menu .nav-collapse .nav > li:last-child {
+    border-bottom: none;
+    margin-top: 8px;
+  }
+
+  #menu .nav-collapse .nav > li > a,
+  #menu .nav-collapse .dropdown-menu a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    margin: 0 !important;
+    padding: 16px 12px !important;
+    font-family: 'Quicksand', sans-serif !important;
+    font-size: var(--md-sys-typescale-title-medium-size) !important;
+    line-height: var(--md-sys-typescale-title-medium-line-height) !important;
+    font-weight: var(--md-sys-typescale-title-medium-weight) !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--md-sys-color-on-surface) !important;
+    background: transparent !important;
+    border-radius: var(--md-sys-shape-corner-medium) !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--md-sys-motion-duration-short4)
+      var(--md-sys-motion-easing-standard);
+  }
+
+  #menu .nav-collapse .nav > li > a:hover,
+  #menu .nav-collapse .nav > li > a:focus,
+  #menu .nav-collapse .dropdown-menu a:hover,
+  #menu .nav-collapse .dropdown-menu a:focus {
+    color: var(--md-sys-color-on-surface) !important;
+    background: rgba(255, 255, 255, var(--md-sys-state-hover-opacity)) !important;
+  }
+
+  #menu .nav-collapse .wr-m3-nav-expander {
+    justify-content: space-between;
+  }
+
+  #menu .nav-collapse .wr-m3-expander-icon {
+    display: flex;
+    flex-shrink: 0;
+    color: var(--md-sys-color-on-surface-variant);
+    transition: transform var(--md-sys-motion-duration-short4)
+      var(--md-sys-motion-easing-standard);
+  }
+
+  #menu .nav-collapse .dropdown.open > .wr-m3-nav-expander .wr-m3-expander-icon {
+    transform: rotate(180deg);
+  }
+
+  #menu .nav-collapse .dropdown-menu {
+    display: none;
+    position: static;
+    float: none;
+    max-width: none;
+    margin: 0 !important;
+    padding: 0 0 8px 8px !important;
+    background: var(--md-sys-color-surface-container) !important;
+    border: none !important;
+    border-radius: var(--md-sys-shape-corner-medium) !important;
+    box-shadow: none !important;
+  }
+
+  #menu .nav-collapse .dropdown.open > .dropdown-menu {
+    display: block;
+  }
+
+  #menu .nav-collapse .dropdown-menu li {
+    border: none;
+  }
+
+  #menu .nav-collapse .dropdown-menu a {
+    min-height: 48px;
+    padding: 12px 16px !important;
+    font-size: var(--md-sys-typescale-label-medium-size) !important;
+    line-height: var(--md-sys-typescale-label-medium-line-height) !important;
+    font-weight: var(--md-sys-typescale-label-medium-weight) !important;
+    color: var(--md-sys-color-on-surface-variant) !important;
+    background: transparent !important;
+  }
+
+  #menu .nav-collapse .wr-nav-cta {
+    justify-content: center;
+    margin: 8px 0 0 !important;
+    padding: 14px 24px !important;
+    min-height: 48px;
+    background: var(--md-sys-color-secondary) !important;
+    color: var(--md-sys-color-on-secondary) !important;
+    border-radius: var(--md-sys-shape-corner-full) !important;
+    box-shadow: none !important;
+  }
+
+  #menu .nav-collapse .wr-nav-cta:hover,
+  #menu .nav-collapse .wr-nav-cta:focus {
+    background: #c93d44 !important;
+    color: var(--md-sys-color-on-secondary) !important;
+  }
+}
+
+@media (min-width: 980px) {
+  .wr-m3-nav-scrim,
+  .wr-m3-drawer-header {
+    display: none !important;
+  }
+
+  body.wr-m3-nav-open {
+    overflow: auto !important;
+  }
 }
 
 #wr-hero,
@@ -1249,23 +1560,25 @@
 }
 
 @media (max-width: 768px) {
+  /* M3 scrim on imagery — keep photo visible for trust; darken where text sits */
   #wr-hero.wr-hero {
-    min-height: 0;
-    align-items: flex-start;
+    min-height: 300px;
+    align-items: flex-end;
   }
 
   .wr-hero__overlay {
     background: linear-gradient(
       180deg,
-      rgba(1, 0, 56, 0.97) 0%,
-      rgba(1, 0, 56, 0.93) 100%
+      rgba(1, 0, 56, 0.35) 0%,
+      rgba(1, 0, 56, 0.72) 55%,
+      rgba(1, 0, 56, 0.88) 100%
     );
   }
 
   .wr-hero__bg {
-    background-position: 75% 40%;
-    filter: blur(3px);
-    transform: scale(1.06);
+    background-position: center 35%;
+    filter: none;
+    transform: none;
   }
 
   .wr-hero__inner {
@@ -1387,22 +1700,23 @@
     text-align: left;
   }
 
-  .wr-mobile-cta-bar {
+  /* M3 bottom bar — surface container + elevation (https://m3.material.io/) */
+  .wr-mobile-cta-bar.wr-m3-bottom-bar {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 1999;
+    min-height: 80px;
     gap: 8px;
     padding: 8px 12px;
     padding-bottom: max(8px, env(safe-area-inset-bottom));
-    background: rgba(1, 0, 56, 0.97);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.28);
+    background: var(--md-sys-color-surface-container-low);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    box-shadow: var(--md-sys-elevation-3);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .wr-mobile-cta-bar a {
@@ -1411,95 +1725,148 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .wr-mcta--primary {
+  .wr-m3-label {
+    font-size: var(--md-sys-typescale-label-medium-size);
+    line-height: var(--md-sys-typescale-label-medium-line-height);
+    font-weight: var(--md-sys-typescale-label-medium-weight);
+    letter-spacing: var(--md-sys-typescale-label-medium-tracking);
+  }
+
+  .wr-m3-body-small {
+    font-size: var(--md-sys-typescale-body-small-size);
+    line-height: var(--md-sys-typescale-body-small-line-height);
+    font-weight: var(--md-sys-typescale-body-small-weight);
+  }
+
+  /* M3 filled button — tertiary accent for WhatsApp */
+  .wr-m3-filled-button {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex: 1 1 auto;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     min-width: 0;
-    padding: 10px 14px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #25d366 0%, #1ebe57 100%);
-    color: #fff !important;
-    box-shadow: 0 2px 12px rgba(37, 211, 102, 0.35);
+    min-height: 40px;
+    padding: 10px 24px;
+    border-radius: var(--md-sys-shape-corner-full);
+    background: var(--md-sys-color-tertiary);
+    color: var(--md-sys-color-on-tertiary) !important;
+    box-shadow: none;
+    transition:
+      background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+      border-radius var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
-  .wr-mcta--primary:active {
-    transform: scale(0.98);
+  .wr-m3-filled-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--md-sys-color-on-tertiary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
-  .wr-mcta--primary .wr-mcta__icon {
+  .wr-m3-filled-button:active {
+    border-radius: var(--md-sys-shape-corner-small);
+  }
+
+  .wr-m3-filled-button:active::before {
+    opacity: var(--md-sys-state-pressed-opacity);
+  }
+
+  .wr-m3-filled-button .wr-m3-button-icon {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
   }
 
-  .wr-mcta--primary .wr-mcta__copy {
+  .wr-m3-filled-button .wr-mcta__copy {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     min-width: 0;
-    line-height: 1.2;
   }
 
-  .wr-mcta--primary .wr-mcta__title {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.01em;
+  .wr-m3-filled-button .wr-mcta__title {
+    font-size: var(--md-sys-typescale-title-small-size);
+    line-height: var(--md-sys-typescale-title-small-line-height);
+    font-weight: var(--md-sys-typescale-title-small-weight);
+    letter-spacing: 0;
   }
 
-  .wr-mcta--primary .wr-mcta__sub {
-    font-size: 11px;
-    font-weight: 500;
-    opacity: 0.92;
+  .wr-m3-filled-button .wr-mcta__sub {
+    opacity: 0.9;
   }
 
-  .wr-mcta-quick {
+  /* M3 navigation destinations — 48dp touch targets */
+  .wr-m3-nav-cluster {
     display: flex;
     flex: 0 0 auto;
-    gap: 6px;
+    gap: 4px;
   }
 
-  .wr-mcta--quick {
+  .wr-m3-nav-item {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    width: 52px;
-    padding: 8px 4px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: background 0.15s ease;
+    gap: 4px;
+    min-width: 64px;
+    min-height: 48px;
+    padding: 4px 8px 6px;
+    border-radius: var(--md-sys-shape-corner-medium);
+    color: var(--md-sys-color-on-surface-variant) !important;
+    background: transparent;
+    transition:
+      color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+      background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
-  .wr-mcta--quick:active {
-    background: rgba(255, 255, 255, 0.2);
+  .wr-m3-nav-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--md-sys-color-on-surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
-  .wr-mcta--quick .wr-mcta__icon {
+  .wr-m3-nav-item:active::before {
+    opacity: var(--md-sys-state-pressed-opacity);
+  }
+
+  .wr-m3-nav-item .wr-mcta__icon {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.95;
+    width: 24px;
+    height: 24px;
   }
 
-  .wr-mcta--quick .wr-mcta__title {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  .wr-m3-nav-item .wr-mcta__title {
+    position: relative;
+    z-index: 1;
+    text-transform: none;
   }
 
   body {
-    padding-bottom: 72px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
   }
 
   /* Avoid duplicate WhatsApp affordances with the sticky bar */
