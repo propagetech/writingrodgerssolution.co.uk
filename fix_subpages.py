@@ -9,12 +9,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 PARTIALS = ROOT / "partials"
 
-WA_UK = (
-    "https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20"
+WA_PRIMARY = (
+    "https://wa.me/917044974618?text=Hi%20Writing%20Rodgers%2C%20"
     "I%20need%20assignment%20help.%20Subject%3A%20%0ADeadline%3A%20"
 )
-WA_UK_SHORT = (
-    "https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20"
+WA_PRIMARY_SHORT = (
+    "https://wa.me/917044974618?text=Hi%20Writing%20Rodgers%2C%20"
     "I%20need%20assignment%20help.%20"
 )
 
@@ -106,7 +106,7 @@ def fix_cta_buttons(html: str) -> str:
 def inject_sub_hero(html: str, title: str) -> str:
     if "wr-sub-hero" in html:
         return html
-    hero = SUB_HERO_TEMPLATE.format(title=title, wa=WA_UK)
+    hero = SUB_HERO_TEMPLATE.format(title=title, wa=WA_PRIMARY)
     menu_pos = html.find('id="menu"')
     if menu_pos == -1:
         return html
@@ -130,7 +130,7 @@ def fix_nav_contact(html: str) -> str:
 def fix_404(html: str) -> str:
     html = html.replace('href="home.html"', 'href="/"')
     if "live-chat-fixed" not in html:
-        floating = f'''  <a class="live-chat-fixed no-loader-all" href="{WA_UK_SHORT}" target="_blank" rel="noopener" title="WhatsApp UK team">
+        floating = f'''  <a class="live-chat-fixed no-loader-all" href="{WA_PRIMARY_SHORT}" target="_blank" rel="noopener" title="WhatsApp Writing Rodgers">
     <img src="imgs/image-20.webp" alt="Chat on WhatsApp" style="border-radius: 50%; width: 50px; height: 50px" />
   </a>
 '''

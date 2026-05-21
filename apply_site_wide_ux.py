@@ -10,10 +10,10 @@ ROOT = Path(__file__).resolve().parent
 PARTIALS = ROOT / "partials"
 EXCLUDE_DIRS = {"old", "partials"}
 
-WA_UK = "https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20Subject%3A%20%0ADeadline%3A%20"
-WA_UK_SHORT = "https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20"
+WA_PRIMARY = "https://wa.me/917044974618?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20Subject%3A%20%0ADeadline%3A%20"
+WA_PRIMARY_SHORT = "https://wa.me/917044974618?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20"
 
-FLOATING_WA = f'''  <a class="live-chat-fixed no-loader-all" href="{WA_UK_SHORT}" target="_blank" title="WhatsApp UK team">
+FLOATING_WA = f'''  <a class="live-chat-fixed no-loader-all" href="{WA_PRIMARY_SHORT}" target="_blank" title="WhatsApp Writing Rodgers">
     <img src="imgs/image-20.webp" alt="Chat on WhatsApp" style="border-radius: 50%; width: 50px; height: 50px" />
   </a>'''
 
@@ -91,7 +91,7 @@ def fix_floating_whatsapp(html: str) -> str:
     else:
         html = re.sub(
             r'<a class="live-chat-fixed[^"]*"[^>]*href="[^"]*"[^>]*>',
-            f'<a class="live-chat-fixed no-loader-all" href="{WA_UK_SHORT}" target="_blank" title="WhatsApp UK team">',
+            f'<a class="live-chat-fixed no-loader-all" href="{WA_PRIMARY_SHORT}" target="_blank" title="WhatsApp Writing Rodgers">',
             html,
             count=1,
             flags=re.IGNORECASE,
@@ -103,13 +103,16 @@ def fix_whatsapp_urls(html: str) -> str:
     replacements = [
         (
             "https://api.whatsapp.com/send?phone=917044974618&amp;&amp;text=Hi Writing Rodgers",
-            WA_UK_SHORT,
+            WA_PRIMARY_SHORT,
         ),
-        ("https://api.whatsapp.com/send?phone=917044974618", WA_UK_SHORT),
-        ("https://wa.me/+917044974618", WA_UK_SHORT),
-        ("https://wa.me/+447452212920", WA_UK_SHORT),
-        ("wa.me/+917044974618", "wa.me/447452010395"),
-        ("wa.me/+447452212920", "wa.me/447452010395"),
+        ("https://api.whatsapp.com/send?phone=917044974618", WA_PRIMARY_SHORT),
+        ("https://wa.me/+917044974618", WA_PRIMARY_SHORT),
+        ("https://wa.me/447452010395", WA_PRIMARY_SHORT),
+        ("https://wa.me/+447452010395", WA_PRIMARY_SHORT),
+        ("https://wa.me/+447452212920", WA_PRIMARY_SHORT),
+        ("wa.me/447452010395", "wa.me/917044974618"),
+        ("wa.me/+447452010395", "wa.me/917044974618"),
+        ("wa.me/+447452212920", "wa.me/917044974618"),
     ]
     for old, new in replacements:
         html = html.replace(old, new)

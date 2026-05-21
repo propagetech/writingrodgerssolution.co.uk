@@ -150,7 +150,23 @@
 
   function bindMobileDropdowns($menu, $collapse) {
     $menu.find('.dropdown-toggle').off('click.wrM3Dropdown').on('click.wrM3Dropdown', function (e) {
+      var href = $(this).attr('href') || '';
+      // Desktop: Bootstrap's dropdown JS skips toggling when href points to a real
+      // anchor (e.g. "#wr-services"). Take over so the menu both opens AND scrolls.
       if (!isMobileNav()) {
+        if (href.length > 1 && href.charAt(0) === '#') {
+          e.preventDefault();
+          var $item = $(this).closest('.dropdown');
+          var wasOpen = $item.hasClass('open');
+          $menu.find('.dropdown.open').removeClass('open');
+          if (!wasOpen) {
+            $item.addClass('open');
+          }
+          var target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
         return;
       }
 

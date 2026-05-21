@@ -17,7 +17,7 @@ ORPHAN_PATTERN = re.compile(
 
 def fix_file(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
-    if "ASSIGNMENTS BY UNIVERSITY" not in text or 'href="/#wr-contact">Contact' not in text:
+    if "Assignments by University" not in text or 'href="/#wr-contact">Contact' not in text:
         return False
     updated, n = ORPHAN_PATTERN.subn(r"\1\n                    </ul>\2", text, count=1)
     if n:

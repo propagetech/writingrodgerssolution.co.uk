@@ -21,7 +21,7 @@ SERVICE_PAGES = [
     "academic-coaching-help.html",
 ]
 
-HERO_ACTIONS = """            <a class="wr-btn-primary" href="https://wa.me/447452010395?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20Subject%3A%20%0ADeadline%3A%20" target="_blank" rel="noopener">Get a free quote on WhatsApp</a>
+HERO_ACTIONS = """            <a class="wr-btn-primary" href="https://wa.me/917044974618?text=Hi%20Writing%20Rodgers%2C%20I%20need%20assignment%20help.%20Subject%3A%20%0ADeadline%3A%20" target="_blank" rel="noopener">Get a free quote on WhatsApp</a>
             <a class="wr-btn-secondary wr-btn-call" href="tel:+447452010395">Call +44 7452010395</a>"""
 
 

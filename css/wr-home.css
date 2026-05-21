@@ -1,6 +1,18 @@
 /* Writing Rodgers — homepage conversion layer */
 @import url('wr-m3-tokens.css');
 
+/* Anchor-scroll offset for the fixed top menu.
+   Desktop nav wraps to two rows (~129px). Mobile nav is 64px. */
+html {
+  scroll-padding-top: 140px;
+}
+
+@media (max-width: 979px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+}
+
 .wr-nav-link {
   color: rgba(231, 226, 226, 1) !important;
   font-size: 14px !important;
@@ -15,6 +27,50 @@
   border-radius: 50px !important;
   margin-left: 8px !important;
   padding: 10px 18px !important;
+}
+
+/* Active page indicator — set by js/wr-nav-active.js */
+.wr-nav-link.is-active,
+.wr-nav-link.is-active-parent {
+  color: #fec919 !important;
+}
+
+@media (min-width: 980px) {
+  /* Desktop: subtle yellow underline accent below the active item */
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active,
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active-parent {
+    position: relative;
+  }
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active::after,
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active-parent::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 4px;
+    height: 2px;
+    background: #fec919;
+    border-radius: 1px;
+  }
+  /* Don't underline the round red Contact pill */
+  #menu .wr-m3-navigation-drawer .nav > li > a.wr-nav-cta.is-active::after {
+    display: none;
+  }
+}
+
+@media (max-width: 979px) {
+  /* Mobile drawer: filled yellow tint on the active row */
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active,
+  #menu .wr-m3-navigation-drawer .nav > li > a.is-active-parent {
+    background: rgba(254, 201, 25, 0.12) !important;
+    color: #fec919 !important;
+  }
+  /* Submenu item active row */
+  .wr-component--header .wr-m3-navigation-drawer .dropdown-menu li a.is-active,
+  #menu .wr-m3-navigation-drawer .dropdown-menu li a.is-active {
+    color: #fec919 !important;
+    font-weight: 600 !important;
+  }
 }
 
 .wr-nav-cta:hover {
@@ -561,7 +617,7 @@
     flex-direction: row !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
     row-gap: 2px;
     gap: 0;
     margin: 0 !important;
@@ -597,8 +653,10 @@
     background: transparent !important;
     text-align: left !important;
     white-space: nowrap !important;
-    font-size: 12px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
     padding: 8px 10px !important;
+
   }
 
   #menu .wr-m3-navigation-drawer .wr-m3-expander-icon,
@@ -656,16 +714,72 @@
   }
 }
 
-#wr-hero,
-#wr-how-it-works,
-#wr-team,
-#wr-reach,
-#wr-services,
-#wr-tutoring,
-#wr-why,
-#wr-testimonials,
-#wr-contact {
-  scroll-margin-top: 72px;
+/* scroll-margin-top now handled globally via html { scroll-padding-top } above */
+
+/* Breadcrumb — sits on a light strip between the dark nav and the page hero */
+.wr-breadcrumb {
+  background: #f6f5f2;
+  border-bottom: 1px solid rgba(1, 0, 56, 0.06);
+  padding: 12px 24px;
+}
+
+.wr-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #626263;
+}
+
+.wr-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wr-breadcrumb__item + .wr-breadcrumb__item::before {
+  content: "›";
+  color: #9a9a9a;
+  font-weight: 600;
+}
+
+.wr-breadcrumb__item a {
+  color: #626263;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.wr-breadcrumb__item a:hover {
+  color: #010038;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wr-breadcrumb__item[aria-current="page"] {
+  color: #010038;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .wr-breadcrumb {
+    padding: 10px 16px;
+  }
+
+  .wr-breadcrumb__list {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .wr-breadcrumb__item + .wr-breadcrumb__item::before {
+    margin-left: -2px;
+  }
 }
 
 /* Subpage hero strip */
@@ -956,13 +1070,6 @@
 .wr-page .wr-sub-hero ~ link ~ .wr-component .button-align,
 .wr-page .wr-sub-hero ~ link ~ link ~ .wr-component .button-align {
   display: none !important;
-}
-
-#wr-contact,
-#wr-coaching-benefits,
-#wr-exam-services,
-#wr-exam-why {
-  scroll-margin-top: 72px;
 }
 
 /* Legacy subpage blocks (until each page is refactored) */
@@ -1470,7 +1577,25 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   max-width: 1100px;
-  margin: 0 auto 28px;
+  margin: 0 auto 24px;
+}
+
+.wr-services__group {
+  max-width: 1100px;
+  margin: 24px auto 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (min-width: 980px) {
+  /* On desktop, place subject grid (6 cards) at 3x2 and writing-format grid (7) at 4x2 */
+  .wr-services .wr-services-grid + .wr-services__group + .wr-services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .wr-service-card {
@@ -1517,10 +1642,20 @@
 
 .wr-services-formats {
   text-align: center;
-  margin: 0 0 20px;
+  margin: 16px 0 20px;
   font-family: 'Quicksand', sans-serif;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.75);
+}
+
+.wr-services-formats a {
+  color: #fec919;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wr-services-formats a:hover {
+  color: #fff;
 }
 
 .wr-services-cta {
