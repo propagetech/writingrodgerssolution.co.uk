@@ -49,9 +49,218 @@
   padding: 36px 24px 40px;
 }
 
+/* Split hero: image left, title + CTAs right (all Services pages) */
+.wr-sub-hero--split {
+  padding: 28px 24px 36px;
+}
+
+.wr-sub-hero__split {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.92fr) minmax(0, 1.08fr);
+  gap: 28px 36px;
+  align-items: center;
+}
+
+.wr-sub-hero__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wr-sub-hero__media img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.wr-sub-hero__panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Service landing hero — image | problem + story + CTA (like client mockup) */
+.wr-sub-hero--landing {
+  background: #fff;
+  padding: 40px 24px 48px;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__media img {
+  box-shadow: 0 8px 24px rgba(1, 0, 56, 0.12);
+}
+
+.wr-sub-hero--landing .wr-sub-hero__eyebrow {
+  margin: 0 0 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626263;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__headline {
+  margin: 0 0 16px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3.2vw, 30px);
+  line-height: 1.25;
+  color: #010038;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__story {
+  margin: 0 0 22px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #403f3b;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__actions {
+  margin-bottom: 14px;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__trust {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #626263;
+}
+
+.wr-sub-hero--landing .wr-sub-hero__trust a {
+  color: #010038;
+  font-weight: 600;
+}
+
+.wr-sub-hero--landing .wr-btn-secondary {
+  border-color: #010038;
+  color: #010038 !important;
+}
+
+.wr-sub-hero--landing .wr-btn-secondary:hover {
+  background: #f6f5f2;
+  color: #010038 !important;
+}
+
+/* Story-first: CTAs after problem/solution, not in top panel */
+.wr-sub-cta-band {
+  padding: 40px 24px 48px;
+  background: linear-gradient(135deg, #010038 0%, #1a1a5e 100%);
+  text-align: center;
+}
+
+.wr-sub-cta-band__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.wr-sub-cta-band .wr-section-title,
+.wr-sub-cta-band .wr-section-lead {
+  color: #fff;
+}
+
+.wr-sub-cta-band .wr-section-lead {
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 24px;
+}
+
+.wr-sub-cta-band .wr-sub-hero__actions {
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.wr-sub-cta-band__intl {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wr-sub-cta-band__intl a {
+  color: #fec919;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.wr-sub-cta-band__intl a:hover {
+  color: #fff;
+}
+
 .wr-sub-hero__inner {
   max-width: 900px;
   margin: 0 auto;
+}
+
+/* Intro + details below split hero */
+.wr-sub-intro {
+  padding: 40px 24px 32px;
+  background: #fff;
+}
+
+.wr-sub-intro__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wr-sub-intro__title {
+  margin: 0 0 16px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.3;
+  color: #010038;
+}
+
+.wr-sub-intro__lead {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #403f3b;
+}
+
+.wr-sub-details {
+  padding: 48px 24px;
+  background: #f6f5f2;
+}
+
+.wr-sub-details__inner,
+.wr-sub-details__block {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.wr-sub-details__block + .wr-sub-details__block {
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(1, 0, 56, 0.1);
+}
+
+.wr-sub-details .wr-section-title {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.wr-sub-prose,
+.wr-sub-prose p,
+.wr-sub-details__block p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #403f3b;
+  margin: 0 0 16px;
+}
+
+.wr-sub-prose ul,
+.wr-sub-details__block .wr-benefit-list {
+  margin: 0 0 8px;
 }
 
 .wr-sub-hero__title {
@@ -422,6 +631,23 @@
   content: "✓ ";
   color: #fec919;
   font-weight: 700;
+}
+
+.wr-hero__sub--short {
+  display: none;
+}
+
+.wr-hero__intl {
+  margin: 16px 0 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wr-hero__intl a {
+  color: #fec919;
+  font-weight: 600;
 }
 
 /* How it works */
@@ -1016,12 +1242,74 @@
 }
 
 @media (max-width: 768px) {
-  .wr-hero__inner {
-    padding: 36px 20px 44px;
+  #wr-hero.wr-hero {
+    min-height: 0;
+    align-items: flex-start;
   }
 
+  .wr-hero__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(1, 0, 56, 0.97) 0%,
+      rgba(1, 0, 56, 0.93) 100%
+    );
+  }
+
+  .wr-hero__bg {
+    background-position: 75% 40%;
+    filter: blur(3px);
+    transform: scale(1.06);
+  }
+
+  .wr-hero__inner {
+    padding: 28px 18px 32px;
+  }
+
+  .wr-hero__tagline {
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+
+  .wr-hero h1 {
+    margin-bottom: 12px;
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.2;
+  }
+
+  .wr-hero__sub {
+    margin-bottom: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .wr-hero__sub--full {
+    display: none;
+  }
+
+  .wr-hero__sub--short {
+    display: block;
+  }
+
+  /* Sticky bar already has WhatsApp, call, and email */
   .wr-hero__actions {
+    display: none;
+  }
+
+  .wr-trust-strip {
     flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .wr-trust-strip__extra {
+    display: none;
+  }
+
+  .wr-hero__intl {
+    margin-top: 14px;
+    font-size: 13px;
   }
 
   .wr-btn-primary,
@@ -1072,11 +1360,24 @@
     flex-direction: column;
   }
 
+  .wr-sub-hero__split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .wr-sub-hero__media img {
+    max-width: 100%;
+  }
+
   .wr-sub-hero .wr-btn-primary,
   .wr-sub-hero .wr-btn-secondary {
     width: 100%;
     text-align: center;
     box-sizing: border-box;
+  }
+
+  .wr-sub-intro__inner {
+    text-align: left;
   }
 
   .wr-mobile-cta-bar {
@@ -1122,10 +1423,22 @@
   }
 
   body {
-    padding-bottom: 64px;
+    padding-bottom: 58px;
   }
 
+  /* Avoid duplicate WhatsApp affordances with the sticky bar */
   a.live-chat-fixed {
-    bottom: 72px !important;
+    display: none !important;
+  }
+
+  .wr-mobile-cta-bar {
+    padding: 8px 10px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    gap: 6px;
+  }
+
+  .wr-mobile-cta-bar a {
+    padding: 11px 8px;
+    font-size: 13px;
   }
 }
