@@ -1505,14 +1505,21 @@ html {
 }
 
 .wr-team-card__photo {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   object-position: center top;
   border-radius: 50%;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border: 3px solid #fec919;
   background: #e5e5e5;
+}
+
+@media (max-width: 480px) {
+  .wr-team-card__photo {
+    width: 160px;
+    height: 160px;
+  }
 }
 
 .wr-team-card h3 {
@@ -1742,6 +1749,51 @@ html {
   justify-self: center;
 }
 
+/* Featured single video — 16:9 landscape clip, centered */
+.wr-featured-video {
+  background: #fff;
+  padding: 48px 24px 24px;
+}
+
+.wr-featured-video__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wr-featured-video .wr-section-title,
+.wr-featured-video .wr-section-lead {
+  text-align: center;
+}
+
+.wr-featured-video__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 24px auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #010038;
+  box-shadow: 0 8px 24px rgba(1, 0, 56, 0.15);
+}
+
+.wr-featured-video__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .wr-featured-video {
+    padding: 36px 16px 16px;
+  }
+
+  .wr-featured-video__frame {
+    border-radius: 8px;
+  }
+}
+
 /* YouTube Shorts grid — 9:16 vertical clips, 4 cols desktop → 2 cols ≤ 979px */
 .wr-shorts {
   background: #fff;
@@ -1821,13 +1873,74 @@ html {
   text-align: center;
 }
 
+/* Carousel viewport — clips the sliding track on desktop, container for the
+   absolutely positioned stack on mobile (crossfade). */
+.wr-gallery__viewport {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Prev / next arrows (Material Symbols), positioned over the viewport */
+.wr-gallery__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #010038;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(1, 0, 56, 0.18);
+  transform: translateY(-50%);
+  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wr-gallery__nav:hover,
+.wr-gallery__nav:focus-visible {
+  background: #fff;
+  transform: translateY(-50%) scale(1.06);
+  outline: none;
+}
+
+.wr-gallery__nav:focus-visible {
+  box-shadow: 0 0 0 3px #fec919, 0 4px 14px rgba(1, 0, 56, 0.18);
+}
+
+.wr-gallery__nav--prev { left: 12px; }
+.wr-gallery__nav--next { right: 12px; }
+
+.wr-gallery__nav .material-symbols-outlined {
+  font-size: 28px;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .wr-gallery__nav {
+    width: 38px;
+    height: 38px;
+  }
+  .wr-gallery__nav .material-symbols-outlined {
+    font-size: 24px;
+  }
+  .wr-gallery__nav--prev { left: 8px; }
+  .wr-gallery__nav--next { right: 8px; }
+}
+
 .wr-gallery__grid {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  position: relative;
 }
 
 .wr-gallery__item {
@@ -1836,6 +1949,66 @@ html {
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(1, 0, 56, 0.08);
   aspect-ratio: 4 / 3;
+}
+
+/* Desktop: 3-up horizontal slider that translates one item at a time.
+   The middle card scales up via .is-middle; the scale transition runs
+   concurrently with the grid slide so the new centre card grows as it
+   moves into place and the previous centre shrinks back to default. */
+@media (min-width: 769px) {
+  .wr-gallery__grid {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;  /* room for the scaled-up middle card */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .wr-gallery__item {
+    flex: 0 0 calc((100% - 32px) / 3);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.6s ease;
+  }
+  .wr-gallery__item.is-middle {
+    transform: scale(1.08);
+    z-index: 2;
+    box-shadow: 0 14px 36px rgba(1, 0, 56, 0.22);
+  }
+}
+
+/* Mobile: 1-up crossfade — items stacked on top of each other */
+@media (max-width: 768px) {
+  .wr-gallery__viewport {
+    aspect-ratio: 4 / 3;
+  }
+  .wr-gallery__grid {
+    height: 100%;
+  }
+  .wr-gallery__item {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+  .wr-gallery__item.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .wr-gallery__viewport {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-gallery__grid,
+  .wr-gallery__item {
+    transition: none !important;
+  }
 }
 
 .wr-gallery__btn {
@@ -1884,21 +2057,6 @@ html {
 @media (max-width: 768px) {
   .wr-gallery {
     padding: 40px 16px 48px;
-  }
-
-  .wr-gallery__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .wr-gallery__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .wr-gallery__item {
-    aspect-ratio: 16 / 10;
   }
 }
 

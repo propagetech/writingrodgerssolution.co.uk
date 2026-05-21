@@ -67,7 +67,7 @@ REPLACEMENTS: list[tuple[str, str]] = [
         "stays on WhatsApp until submission — the same support",
         "stays on WhatsApp until submission, the same support",
     ),
-    ("Registered UK address — London, SE17", "Registered UK address in London, SE17"),
+    ("Registered UK address — London, SE17", "Registered UK address in London, 233 Holmesdale Rd, London SE25 6PR"),
     ('alt="Subham — Writing Rodgers partner"', 'alt="Subham, Writing Rodgers partner"'),
     ('alt="Tania — Writing Rodgers partner"', 'alt="Tania, Writing Rodgers partner"'),
     ("Live 1:1 tutoring — law, nursing", "Live 1:1 tutoring in law, nursing"),
