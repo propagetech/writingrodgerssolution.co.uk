@@ -2562,7 +2562,21 @@ body.wr-lightbox-open {
 
 .wr-testimonials__cta {
   text-align: center;
-  margin: 0;
+  margin: 28px 0 0;
+}
+
+.wr-testimonials__cta-lead {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #010038;
+}
+
+.wr-testimonials__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 /* Contact (no forms) */
