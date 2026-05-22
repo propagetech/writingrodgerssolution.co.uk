@@ -1,0 +1,377 @@
+/* ---------------------------------------------------------------------------
+   wr-vanilla.css
+   Vanilla replacements for the Bootstrap-2 / plugin CSS rules used by
+   index.html. No Bootstrap class names remain in the HTML — every rule
+   below targets BEM-style wr-* class names.
+
+   This file PLUS wr-home.css + internal-styles.css now fully style the page.
+   main-7.css (Bootstrap 2) and main-3/4/6.css (font self-host) are no longer
+   loaded by index.html.
+
+   Browser support: modern evergreen only.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --wr-header-h: 108px;
+}
+@media (max-width: 979px) {
+  :root { --wr-header-h: 64px; }
+}
+
+/* ---------- Reset / box-sizing ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ---------- Default fonts (sitewide) ----------
+   Body copy, lists, paragraphs, tables, blockquotes, captions etc. all
+   inherit font-family from <body>, so listing them individually is
+   redundant — the inheritance takes care of <p>, <ul>, <li>, <ol>,
+   <dl>, <blockquote>, <cite>, <address>, <figcaption>, <time>, <span>, etc.
+
+   The two exceptions:
+     - Headings get the display serif.
+     - Form controls (input/textarea/select/button) have their own
+       user-agent defaults, so we explicitly opt them into the body font. */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.wr-heading-1, .wr-heading-2, .wr-heading-3,
+.wr-section__heading {
+  font-family: 'Playfair Display', serif;
+}
+
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+/* Smooth anchor scrolling with offset for the sticky header.
+   wr-home.css already sets `scroll-padding-top` on <html> — we add
+   `scroll-margin-top` as a belt-and-braces fallback. */
+html { scroll-behavior: smooth; }
+main section[id],
+main [id^="wr-"] { scroll-margin-top: calc(var(--wr-header-h) + 16px); }
+
+/* ---------- Brand link (replaces .brand) ---------- */
+
+.wr-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+.wr-brand:hover { text-decoration: none; }
+
+/* ---------- M3 app bar — replaces .navbar / .navbar-inner / .menu-center ---------- */
+
+.wr-m3-app-bar {
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+.wr-m3-app-bar--dark {
+  /* Dark surface; specific colour set via inline style on the bg layer in HTML */
+}
+
+.wr-m3-app-bar__inner {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+/* On the homepage, wr-home.css overrides this to flex-start at >=980px.
+   This is just a safe default. */
+.wr-m3-app-bar__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+/* ---------- M3 nav list — replaces .nav ---------- */
+
+.wr-m3-nav {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  position: relative;
+}
+
+.wr-m3-nav > li {
+  position: relative;
+}
+
+.wr-m3-nav > li > a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wr-m3-nav > li > a:hover,
+.wr-m3-nav > li > a:focus {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Submenu (dropdown) — replaces .dropdown / .dropdown-menu ---------- */
+
+.wr-m3-nav__item--has-submenu {
+  position: relative;
+}
+
+.wr-m3-nav__toggle {
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wr-m3-nav__caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-top: 4px solid currentColor;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.wr-m3-nav__submenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  z-index: 1000;
+  display: none;
+  min-width: 220px;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+  background: #fff;
+  border: 0;
+  border-top: 2px solid #F1720C;
+  border-radius: 0;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+  background-clip: padding-box;
+}
+
+.wr-m3-nav__submenu > li > a {
+  display: block;
+  padding: 6px 15px;
+  clear: both;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 35px;
+  color: #444 !important;
+  white-space: normal;
+  text-align: right;
+  border-bottom: 1px solid #e7e7e7;
+  text-decoration: none;
+  transition: background-color 200ms ease-in, color 200ms ease-in;
+}
+
+.wr-m3-nav__submenu > li > a:hover,
+.wr-m3-nav__submenu > li > a:focus {
+  background: #000;
+  color: #777 !important;
+}
+
+/* Open state — driven by wr-nav.js (click) or :hover (desktop) */
+.wr-m3-nav__item--has-submenu.is-open > .wr-m3-nav__submenu { display: block; }
+
+/* Desktop hover-open with 200ms delay (snappy M3 feel) */
+@media (min-width: 980px) {
+  .wr-m3-nav__item--has-submenu:hover > .wr-m3-nav__submenu,
+  .wr-m3-nav__item--has-submenu:focus-within > .wr-m3-nav__submenu {
+    display: block;
+    transition-delay: 200ms;
+  }
+}
+
+/* Mobile: submenu becomes inline accordion (override absolute positioning) */
+@media (max-width: 979px) {
+  .wr-m3-nav__submenu {
+    position: static;
+    width: 100%;
+    margin: 2px 0 4px;
+    padding: 4px 0 4px 16px;
+    background: transparent;
+    border: none;
+    border-left: 2px solid var(--md-sys-color-outline-variant, rgba(255, 255, 255, 0.18));
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* ---------- Footer grid — replaces .row-fluid / .span3 / .span6 ---------- */
+
+.wr-footer__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 0;
+  width: 100%;
+}
+.wr-footer__col { min-width: 0; }
+
+@media (max-width: 767px) {
+  .wr-footer__row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Legacy Bootstrap-2 fluid grid + utilities ----------
+   Some content-heavy pages (university / city / country / service pages)
+   still ship Viamagus content sections that lean on the Bootstrap-2 fluid
+   grid (.row-fluid + .spanN) and a few utility classes. These rules
+   reproduce just the behaviour those sections need, without loading the
+   full Bootstrap 2 stylesheet. */
+
+.container-fluid {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.row-fluid > [class*="span"] { min-width: 0; box-sizing: border-box; }
+.row-fluid > .span1  { flex: 0 0 8.333%;  max-width: 8.333%; }
+.row-fluid > .span2  { flex: 0 0 16.666%; max-width: 16.666%; }
+.row-fluid > .span3  { flex: 0 0 25%;     max-width: 25%; }
+.row-fluid > .span4  { flex: 0 0 33.333%; max-width: 33.333%; }
+.row-fluid > .span5  { flex: 0 0 41.666%; max-width: 41.666%; }
+.row-fluid > .span6  { flex: 0 0 50%;     max-width: 50%; }
+.row-fluid > .span7  { flex: 0 0 58.333%; max-width: 58.333%; }
+.row-fluid > .span8  { flex: 0 0 66.666%; max-width: 66.666%; }
+.row-fluid > .span9  { flex: 0 0 75%;     max-width: 75%; }
+.row-fluid > .span10 { flex: 0 0 83.333%; max-width: 83.333%; }
+.row-fluid > .span11 { flex: 0 0 91.666%; max-width: 91.666%; }
+.row-fluid > .span12 { flex: 0 0 100%;    max-width: 100%; }
+
+@media (max-width: 767px) {
+  .row-fluid { flex-direction: column; }
+  .row-fluid > [class*="span"] { flex-basis: auto; max-width: 100%; }
+}
+
+/* Float + image utilities */
+.pull-left  { float: left; }
+.pull-right { float: right; }
+.clearfix::after { content: ""; display: table; clear: both; }
+.img-circle { border-radius: 50%; }
+.img-responsive { display: block; max-width: 100%; height: auto; }
+
+/* ---------- Footer ----------
+   Flat 3-block layout: nav links → social icons → copyright.
+   Outer footer is the full-width grey band; inner wrapper centres the
+   content to max-width 1366px. */
+
+.wr-footer {
+  background: rgba(237, 237, 237, 1);
+  padding: 55px 0 24px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.wr-footer__inner {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.wr-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 8px;
+  margin-bottom: 16px;
+}
+
+.wr-footer__nav a {
+  color: inherit;
+  text-decoration: none;
+  padding: 4px 6px;
+}
+
+.wr-footer__nav a + a::before {
+  content: "·";
+  margin-right: 12px;
+  color: inherit;
+  pointer-events: none;
+}
+
+.wr-footer__nav a:hover { opacity: 0.5; }
+
+.wr-footer__social {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.wr-footer__social a {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.wr-footer__social a:hover { opacity: 0.5; }
+
+.wr-footer__social img {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.wr-footer__copy {
+  margin: 0;
+  color: inherit;
+}
+
+/* ---------- Featurette block ---------- */
+
+.wr-featurette::before,
+.wr-featurette::after { content: " "; display: table; }
+.wr-featurette::after { clear: both; }
+
+/* ---------- Skip link (already in HTML) ---------- */
+
+.wr-skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.wr-skip-link:focus {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  padding: 12px 20px;
+  background: #fff;
+  color: #1a1a1a;
+  z-index: 9999;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

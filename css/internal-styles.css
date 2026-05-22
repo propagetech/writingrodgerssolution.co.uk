@@ -1,5 +1,7 @@
 /* Extracted internal styles from writingrodgerssolution.co.uk HTML pages */
-
+footer, a, .wr-paragraph{
+	font-family: 'Quicksand', sans-serif;
+}
 .wr-component--errorpage{
 background:#D8D8D8;
 text-align:center;
