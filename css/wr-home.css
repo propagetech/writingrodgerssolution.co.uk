@@ -841,8 +841,12 @@ html {
 }
 
 /* Service landing hero — image | problem + story + CTA (like client mockup) */
-.wr-sub-hero--landing {
+.wr-sub-hero--landing:not(.wr-sub-hero--city) {
   background: #fff;
+  padding: 40px 24px 48px;
+}
+
+.wr-sub-hero--landing.wr-sub-hero--city {
   padding: 40px 24px 48px;
 }
 
@@ -850,12 +854,15 @@ html {
   box-shadow: 0 8px 24px rgba(1, 0, 56, 0.12);
 }
 
-/* City-skyline background overlay (set per page via --wr-city-bg CSS var) */
+/* City-skyline background (per-page --wr-city-bg; use root-relative /imgs/… in HTML
+   so url() resolves correctly when var() is substituted from this stylesheet) */
 .wr-sub-hero--city {
   position: relative;
+  background-color: #f6f5f2;
   background-image: var(--wr-city-bg);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   isolation: isolate;
 }
 
@@ -863,38 +870,79 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  /* Light wash so the skyline shows through but the page still reads as a
-     content area. Stronger near the bottom edge of the section. */
   background: linear-gradient(
     180deg,
-    rgba(246, 245, 242, 0.25) 0%,
-    rgba(246, 245, 242, 0.45) 55%,
-    rgba(246, 245, 242, 0.7) 100%
+    rgba(246, 245, 242, 0.12) 0%,
+    rgba(246, 245, 242, 0.28) 55%,
+    rgba(246, 245, 242, 0.48) 100%
   );
   z-index: 0;
+  pointer-events: none;
 }
 
-.wr-sub-hero--city > * { position: relative; z-index: 1; }
+.wr-sub-hero--city > * {
+  position: relative;
+  z-index: 1;
+}
 
-/* Frosted card behind the text panel so the headline + story stay readable
-   over any city skyline. Desktop only — mobile keeps the simple stacked
-   layout where the foreground image already covers the bg. */
-@media (min-width: 769px) {
+/* Frosted panel — readable over skyline on all breakpoints */
+.wr-sub-hero--city .wr-sub-hero__panel {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 14px;
+  padding: 20px 18px;
+  box-shadow: 0 12px 32px rgba(1, 0, 56, 0.1);
+}
+
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
   .wr-sub-hero--city .wr-sub-hero__panel {
     background: rgba(255, 255, 255, 0.82);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.wr-sub-hero--city .wr-sub-hero__panel .wr-btn-secondary {
+  border-color: rgb(1 0 55);
+  color: rgb(1 0 55) !important;
+}
+
+.wr-sub-hero--city .wr-sub-hero__panel .wr-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: rgb(1 0 55) !important;
+}
+
+/* Mobile / tablet: stronger section wash + credit legibility (stacked layout) */
+@media (max-width: 768px) {
+  .wr-sub-hero--city::before {
+    background: linear-gradient(
+      180deg,
+      rgba(246, 245, 242, 0.35) 0%,
+      rgba(246, 245, 242, 0.55) 45%,
+      rgba(246, 245, 242, 0.78) 100%
+    );
+  }
+
+  .wr-sub-hero--city .wr-sub-hero__panel {
+    margin-top: 4px;
+  }
+
+  .wr-sub-hero--city .wr-sub-hero__credit {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 14px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    color: rgba(64, 63, 59, 0.75);
+    text-align: left;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 769px) {
+  .wr-sub-hero--city .wr-sub-hero__panel {
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 12px 32px rgba(1, 0, 56, 0.08);
-  }
-  .wr-sub-hero--city .wr-sub-hero__panel .wr-btn-secondary{
-    border-color: rgb(1 0 55);
-    color: rgb(1 0 55) !important;
-  }
-  .wr-sub-hero--city .wr-sub-hero__panel .wr-btn-secondary:hover{
-    background: rgba(255, 255, 255, 0.82);
-    color: rgb(1 0 55) !important;
   }
 }
 
@@ -1022,6 +1070,10 @@ html {
   background: #f6f5f2;
 }
 
+.wr-sub-details--white {
+  background: #fff;
+}
+
 
 .wr-sub-details__block {
   max-width: 720px;
@@ -1094,8 +1146,40 @@ html {
 }
 
 
-.wr-sub-details__block .wr-benefit-list {
+.wr-sub-details__block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wr-sub-details__block .wr-benefit-list,
+.wr-sub-details__block > ul {
   margin: 0 0 8px;
+}
+
+.wr-sub-details__block ul li {
+  position: relative;
+  padding: 14px 0 14px 28px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #403f3b;
+  border-bottom: 1px solid rgba(1, 0, 56, 0.08);
+}
+
+.wr-sub-details__block ul li:last-child {
+  border-bottom: none;
+}
+
+.wr-sub-details__block ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e84b53;
 }
 
 .wr-sub-hero__title {
@@ -1628,6 +1712,129 @@ html {
   font-size: 15px;
   line-height: 1.5;
   color: #626263;
+}
+
+/* Blog: client dissertation infographic (full artwork, not rebuilt cards) */
+.wr-dissertation-process-section {
+  padding: 48px 20px 56px;
+  background: #f7f8fc;
+}
+
+.wr-dissertation-process-section__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.wr-dissertation-infographic {
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.wr-dissertation-infographic__frame {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e6f0;
+  box-shadow:
+    0 8px 32px rgba(1, 0, 56, 0.08),
+    0 2px 8px rgba(1, 0, 56, 0.04);
+  overflow: hidden;
+}
+
+.wr-dissertation-infographic__hint {
+  display: none;
+  margin: 0;
+  padding: 10px 16px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #626263;
+  text-align: center;
+  background: #f0f2f8;
+  border-bottom: 1px solid #e2e6f0;
+}
+
+.wr-dissertation-infographic__scroll {
+  line-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wr-dissertation-infographic__img {
+  display: block;
+  width: 100%;
+  max-width: 682px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.wr-dissertation-infographic__caption {
+  margin: 12px 0 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #626263;
+  text-align: center;
+}
+
+.wr-dissertation-process-text {
+  margin-bottom: 8px;
+  border: 1px solid #e2e6f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.wr-dissertation-process-text__summary {
+  padding: 14px 18px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #010038;
+  cursor: pointer;
+  list-style: none;
+}
+
+.wr-dissertation-process-text__summary::-webkit-details-marker {
+  display: none;
+}
+
+.wr-dissertation-process-text__list {
+  margin: 0;
+  padding: 0 18px 18px 2.25rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a4a4b;
+}
+
+.wr-dissertation-process-text__list li + li {
+  margin-top: 10px;
+}
+
+.wr-dissertation-process__cta {
+  margin-top: 28px;
+}
+
+@media (max-width: 720px) {
+  .wr-dissertation-infographic__hint {
+    display: block;
+  }
+
+  .wr-dissertation-infographic__scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+  }
+
+  .wr-dissertation-infographic__img {
+    width: auto;
+    max-width: none;
+    min-width: 560px;
+    margin: 0;
+  }
+
+  .wr-dissertation-process-section {
+    padding-top: 36px;
+    padding-bottom: 40px;
+  }
 }
 
 /* Shared section headings */

@@ -35,7 +35,7 @@ Do **not** copy the `wr-blog-index` hub block onto individual blog posts — tha
 
 5. **Nav/footer** — Root-relative links (`index.html`, `blog.html`, `Dissertation-Writing-Help.html`, …). Match an existing page; do not bulk-rewrite all 46 pages.
 
-6. **Blog hub** — If adding a blog post, add a link in the `wr-blog-index` section on [blog.html](blog.html).
+6. **Blog hub** — If adding a blog post, add a `wr-blog-card` entry in the `wr-blog-index__grid` on [blog.html](blog.html): thumbnail (`imgs/…` from the article hero), `<time datetime="YYYY-MM-DD">`, title, excerpt, and `href` to the new post.
 
 7. **Sitemap** — Add `<url>` to [sitemap.xml](sitemap.xml) (`changefreq` monthly, `priority` 0.75–0.8).
 
