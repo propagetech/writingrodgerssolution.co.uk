@@ -212,3 +212,11 @@ a.live-chat-fixed {
     }
 
 .dropzone .dz-preview .dz-details { width: 50px !important;}.dropzone .dz-preview .dz-details { width: 50px !important; height: 60px !important;}.dropzone .dz-preview .dz-details img { width: 50px !important; height: 60px !important;}.dropzone .dz-preview .dz-details .dz-size { font-size: 10px;}.dropzone .dz-preview .dz-progress { top: 60px;}
+
+.wr-blog-index { padding: 24px 20px; max-width: 960px; margin: 0 auto; }
+.wr-blog-index__list { list-style: none; margin: 0; padding: 0; }
+.wr-blog-index__item { margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(40, 39, 37, 0.15); }
+.wr-blog-index__item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.wr-blog-post__title { font-size: 1.125rem; font-weight: 600; color: rgba(251, 76, 70, 1); text-decoration: none; }
+.wr-blog-post__title:hover { text-decoration: underline; }
+.wr-blog-post__desc { margin: 0.35rem 0 0; font-size: 0.9375rem; color: rgba(40, 39, 37, 0.85); }

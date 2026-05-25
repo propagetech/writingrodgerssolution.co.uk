@@ -1120,12 +1120,13 @@ html {
   gap: 10px;
 }
 
-.wr-sub-hero .wr-btn-secondary {
+/* Dark sub-heroes only; landing pages set their own button colours above */
+.wr-sub-hero:not(.wr-sub-hero--landing) .wr-btn-secondary {
   border-color: rgba(255, 255, 255, 0.75);
   color: #fff !important;
 }
 
-.wr-sub-hero .wr-btn-secondary:hover {
+.wr-sub-hero:not(.wr-sub-hero--landing) .wr-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.12);
   color: #fff !important;
 }
